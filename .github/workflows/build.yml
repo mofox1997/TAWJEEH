@@ -24,8 +24,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Generate Wrapper
-        run: gradle wrapper
+      - name: Generate Compatible Gradle Wrapper
+        run: gradle wrapper --gradle-version 8.5
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
 
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace
