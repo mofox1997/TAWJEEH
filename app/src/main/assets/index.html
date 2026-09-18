@@ -1,0 +1,2346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>توجيه - المنصة الذكية للاستشارات الأكاديمية والقبول الجامعي</title>
+    <!-- Google Fonts Inter & Plus Jakarta Sans / Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0F172A; /* Slate 900 */
+            --primary-light: #1E293B; /* Slate 800 */
+            --accent-blue: #2563EB; /* Blue 600 */
+            --accent-cyan: #06B6D4; /* Cyan 500 */
+            --accent-teal: #10B981; /* Emerald 500 */
+            --bg-light: #F8FAFC; /* Slate 50 */
+            --card-bg: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --success-bg: #F0FDF4;
+            --success-border: #BBF7D0;
+            --success-text: #166534;
+            --warning-bg: #FFFBEB;
+            --warning-border: #FDE68A;
+            --warning-text: #92400E;
+            --danger-bg: #FEF2F2;
+            --danger-border: #FECACA;
+            --danger-text: #991B1B;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.12);
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 90px;
+            min-height: 100vh;
+        }
+
+        /* Glassmorphic Navbar */
+        header {
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #fff;
+            padding: 1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .logo-badge {
+            background: rgba(255, 255, 255, 0.15);
+            color: #E2E8F0;
+            font-size: 0.72rem;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 1.2rem auto;
+            padding: 0 1.2rem;
+        }
+
+        /* Dynamic Views */
+        .view {
+            display: none;
+            animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Modern Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: var(--radius-lg);
+            padding: 3rem 1.8rem;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 0.5rem;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-avatar {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #2563EB, #06B6D4);
+            border-radius: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-banner h1 {
+            font-size: 1.85rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #ffffff, #CBD5E1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-banner .tagline {
+            color: var(--accent-cyan);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero-banner p {
+            color: #94A3B8;
+            font-size: 0.96rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .pills-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 2.2rem;
+        }
+
+        .pill-item {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #E2E8F0;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Sleek Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 1.6rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: #334155;
+            font-size: 0.92rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.95rem 1.1rem;
+            border: 1.5px solid #CBD5E1;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            background-color: #F8FAFC;
+            color: var(--text-main);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            outline: none;
+            font-weight: 600;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent-blue);
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 1rem center;
+            background-size: 1.1em;
+            cursor: pointer;
+        }
+
+        /* Action Buttons */
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--accent-blue), #1D4ED8);
+            color: #fff;
+            border: none;
+            padding: 1rem 1.6rem;
+            font-size: 1.05rem;
+            font-weight: 800;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-dark {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+        }
+
+        /* Search Light Component */
+        .search-box-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.4rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-box-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-wrapper {
+            display: flex;
+            gap: 8px;
+            position: relative;
+        }
+
+        .search-input-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border-radius: var(--radius-md);
+            border: 1.5px solid #CBD5E1;
+            font-size: 0.95rem;
+        }
+
+        .suggestions-list {
+            position: absolute;
+            top: 105%;
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            max-height: 220px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+            display: none;
+        }
+
+        .suggestion-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #F1F5F9;
+            font-size: 0.92rem;
+            color: #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.15s;
+        }
+
+        .suggestion-item:hover {
+            background: #EFF6FF;
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        .suggestion-degree {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: var(--radius-full);
+            background: #E2E8F0;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .search-btn-indicator {
+            padding: 0.9rem 1.4rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 800;
+            color: #fff;
+            background-color: #94A3B8;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .search-btn-indicator.light-green {
+            background-color: #10B981 !important;
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.5);
+        }
+
+        .search-btn-indicator.light-red {
+            background-color: #EF4444 !important;
+            box-shadow: 0 0 16px rgba(239, 68, 68, 0.5);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            display: inline-block;
+        }
+
+        .search-feedback {
+            margin-top: 1rem;
+            padding: 0.9rem 1.1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            display: none;
+            line-height: 1.6;
+        }
+
+        .search-feedback.error {
+            background-color: var(--danger-bg);
+            color: var(--danger-text);
+            border: 1px solid var(--danger-border);
+        }
+
+        .search-feedback.success {
+            background-color: var(--success-bg);
+            color: var(--success-text);
+            border: 1px solid var(--success-border);
+        }
+
+        /* Results & Major Cards */
+        .results-toolbar { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            margin-bottom: 1.2rem; 
+        }
+
+        .tool-btn { 
+            border: 1px solid var(--border-color); 
+            background: #FFFFFF; 
+            color: var(--primary); 
+            padding: 0.8rem 1rem; 
+            border-radius: var(--radius-md); 
+            cursor: pointer; 
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: background 0.15s;
+        }
+
+        .tool-btn:hover { background: #F8FAFC; }
+
+        .summary-card { 
+            background: linear-gradient(135deg, var(--primary) 0%, #1E293B 100%); 
+            color: #fff; 
+            border-radius: var(--radius-lg); 
+            padding: 1.4rem; 
+            margin-bottom: 1.4rem; 
+            box-shadow: var(--shadow-md); 
+        }
+
+        .summary-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px; 
+            margin-top: 1rem; 
+        }
+
+        .summary-stat { 
+            background: rgba(255, 255, 255, 0.08); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md); 
+            padding: 0.75rem; 
+            text-align: center; 
+        }
+
+        .summary-stat strong { display: block; font-size: 1.3rem; font-weight: 800; color: var(--accent-cyan); }
+        .summary-stat span { font-size: 0.75rem; opacity: 0.85; }
+
+        .majors-grid {
+            display: grid;
+            gap: 1.3rem;
+            margin-top: 1rem;
+        }
+
+        .major-card {
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--accent-blue);
+            padding: 1.4rem;
+            border-radius: var(--radius-lg);
+            background-color: #FFFFFF;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .major-card.diploma-card {
+            border-right-color: #F59E0B;
+        }
+
+        .major-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .fit-badge { 
+            position: absolute; 
+            top: 16px; 
+            left: 16px; 
+            background: #ECFDF5; 
+            color: #047857; 
+            border: 1px solid #A7F3D0; 
+            border-radius: var(--radius-full); 
+            padding: 4px 12px; 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+        }
+
+        .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 0.9rem;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+        }
+
+        .tag-degree-bach { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+        .tag-degree-dip { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
+        .tag-duration { background: #F1F5F9; color: #475569; }
+        .tag-type-gov { background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
+        .tag-type-priv { background: #F1F5F9; color: #334155; border: 1px solid #CBD5E1; }
+
+        .gap-line { font-size: 0.88rem; margin: 0.6rem 0; color: #475569; }
+        .gap-good { color: #047857; font-weight: 800; }
+        .gap-close { color: #B45309; font-weight: 800; }
+
+        .uni-badge-list {
+            margin: 0.9rem 0;
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            padding: 0.9rem;
+            border-radius: var(--radius-md);
+        }
+
+        .uni-badge-list h4 {
+            font-size: 0.85rem;
+            color: #64748B;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+
+        .uni-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.88rem;
+            padding: 6px 0;
+            border-bottom: 1px dashed #E2E8F0;
+        }
+
+        .uni-item:last-child { border-bottom: none; }
+        .uni-name { font-weight: 700; color: #334155; }
+        .uni-min {
+            color: #1D4ED8;
+            font-weight: 800;
+            background: #EFF6FF;
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+        }
+
+        .market-info {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            padding: 0.9rem;
+            border-radius: var(--radius-md);
+            color: #92400E;
+            font-size: 0.88rem;
+            margin-top: 0.8rem;
+        }
+
+        .market-info strong { display: block; margin-bottom: 3px; color: #78350F; }
+
+        /* Cross Track Box */
+        .cross-track-card {
+            margin-top: 20px;
+            border: 1px solid #BFDBFE;
+            background: linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 100%);
+            border-radius: var(--radius-lg);
+            padding: 1.4rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cross-track-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            border: 0;
+            border-radius: var(--radius-md);
+            padding: 1rem 1.2rem;
+            background: var(--accent-blue);
+            color: #fff;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            transition: all 0.2s;
+        }
+
+        .cross-track-panel { display: none; margin-top: 1rem; }
+        .cross-track-panel.open { display: block; }
+
+        .cross-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: #FFFFFF;
+            padding: 1.1rem;
+            margin-bottom: 12px;
+            border-right: 5px solid var(--accent-blue);
+        }
+
+        .cross-item h4 { color: var(--primary); font-size: 1.1rem; font-weight: 800; }
+        .cross-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+        .cross-note { font-size: 0.88rem; color: #334155; margin-top: 8px; background: #F8FAFC; padding: 10px; border-radius: 8px; border: 1px solid #E2E8F0; }
+        .cross-source { font-size: 0.8rem; color: var(--accent-blue); font-weight: 800; margin-top: 6px; display: block; }
+
+        /* Quiz Extensions */
+        .quiz-action { margin-top: 2rem; text-align: center; }
+        
+        .likert-options { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px; }
+        .likert-options label { 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 54px; 
+            background: #F8FAFC; 
+            border: 1.5px solid #CBD5E1; 
+            border-radius: var(--radius-md); 
+            padding: 8px 6px 8px 30px; 
+            text-align: center; 
+            cursor: pointer; 
+            font-size: 0.78rem; 
+            font-weight: 700;
+            color: #334155;
+            transition: all 0.2s; 
+            user-select: none; 
+        }
+
+        .likert-options label:hover { border-color: var(--accent-teal); background: #ECFDF5; }
+        .likert-options input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+        .likert-options label::before { content: ""; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; border: 2px solid #94A3B8; border-radius: 4px; background: #fff; }
+        .likert-options label::after { content: "✓"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%) scale(0.5); width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; color: #fff; background: var(--accent-teal); border-radius: 4px; font-size: 12px; font-weight: 900; opacity: 0; transition: all 0.15s; }
+        .likert-options label:has(input[type="radio"]:checked) { border-color: var(--accent-teal); background: #ECFDF5; color: #065F46; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.12); }
+        .likert-options label:has(input[type="radio"]:checked)::before { border-color: var(--accent-teal); }
+        .likert-options label:has(input[type="radio"]:checked)::after { opacity: 1; transform: translateY(-50%) scale(1); }
+
+        .quiz-best-box { background: #ECFDF5; border: 1px solid #A7F3D0; border-right: 6px solid var(--accent-teal); border-radius: var(--radius-lg); padding: 1.4rem; text-align: right; margin: 14px 0; }
+        .quiz-best-box h3 { color: var(--primary); margin: 6px 0 10px; font-size: 1.25rem; font-weight: 800; }
+        .quiz-result-label { font-weight: 800; color: #047857; }
+        .quiz-score-row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed #A7F3D0; font-size: 0.92rem; }
+
+        .warning-box { background: #FFFBEB; border-color: #FDE68A; border-right-color: #F59E0B; }
+        .warning-box .quiz-result-label { color: #B45309; }
+
+        .quiz-note { margin-top: 16px; padding: 12px 14px; border-radius: var(--radius-md); background: #EFF6FF; color: #1E3A8A; font-size: 0.88rem; line-height: 1.7; text-align: right; border: 1px solid #BFDBFE; }
+
+        .official-data-notice { background: #FFFFFF; border: 1px solid #BFDBFE; border-right: 6px solid var(--accent-blue); border-radius: var(--radius-lg); padding: 1.2rem; margin: 12px 0; color: #1E293B; box-shadow: var(--shadow-sm); font-size: 0.9rem; }
+        .official-data-title { font-weight: 800; font-size: 1.02rem; margin-bottom: 6px; color: var(--primary); }
+        .official-data-warning { margin: 8px 0; padding: 8px 12px; border-radius: var(--radius-md); background: #FFFBEB; color: #92400E; border: 1px solid #FDE68A; }
+        .official-data-notice a { display: inline-block; margin-top: 6px; color: var(--accent-blue); font-weight: 800; text-decoration: none; }
+
+        /* Floating Nav Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 24px);
+            max-width: 500px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 12px;
+            border-radius: var(--radius-full);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #94A3B8;
+            font-size: 0.72rem;
+            font-weight: 700;
+            transition: all 0.2s;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+        }
+
+        .nav-item .icon { font-size: 1.3rem; margin-bottom: 2px; }
+        .nav-item.active { color: #FFFFFF; background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); box-shadow: 0 0 12px rgba(6, 182, 212, 0.4); }
+
+        @media(max-width: 650px) {
+            .likert-options { grid-template-columns: 1fr 1fr; }
+            .likert-options label:last-child { grid-column: 1 / -1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <a href="#" class="logo" onclick="switchView('home'); return false;">
+            <div class="logo-icon">🎓</div>
+            <span>منصة توجيه</span>
+            <span class="logo-badge">الاستشارات الذكية</span>
+        </a>
+    </header>
+
+    <main class="container">
+
+        <!-- 1. الرئيسية (Home View) -->
+        <section id="view-home" class="view active">
+            <div class="hero-banner">
+                <div class="hero-avatar">
+                    <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                        <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                    </svg>
+                </div>
+                <h1>منصة توجيه الأكاديمية</h1>
+                <span class="tagline">مستشارك الذكي لاختيار التخصص والجامعة المناسبة</span>
+                <p>
+                    منصة الاستشارات الرقمية الأولى لطلاب <strong>الشهادة السودانية</strong>. نُحلل نسبتك الأكاديمية ومساقك الدراسي وفق شروط القبول العام لترشيح التخصصات والجامعات المتاحة فوراً.
+                </p>
+
+                <div class="pills-grid">
+                    <span class="pill-item">🎯 تحليل كلي للنسب</span>
+                    <span class="pill-item">📜 بكالوريوس ودبلومات</span>
+                    <span class="pill-item">💡 لمبة بيان التأهل الفوري</span>
+                    <span class="pill-item">🧠 اختبار الميول الموسع</span>
+                </div>
+
+                <button class="btn" onclick="switchView('percentage')">
+                    ابدأ جلسة الاستشارة الأكاديمية الآن 🚀
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. حساب النسبة (Percentage Input View) -->
+        <section id="view-percentage" class="view">
+            <div class="card">
+                <div class="card-header">
+                    <h2>📊 إدخال البيانات الأكاديمية</h2>
+                </div>
+                <form id="calcForm">
+                    <div class="form-group">
+                        <label for="track">اختر المساق الدراسي الأساسي:</label>
+                        <select id="track" required>
+                            <option value="">-- اختر المساق --</option>
+                            <option value="cs">علمي حاسوب / هندسي</option>
+                            <option value="bio">علمي أحياء (طبي / أحياء)</option>
+                            <option value="eng">علمي هندسية / فيزياء ورسوم</option>
+                            <option value="lit">أدبي دراسات / علوم إنسانية</option>
+                            <option value="arts">أدبي فنون وتصميم</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="percentage">أدخل النسبة المئوية (%):</label>
+                        <input type="number" id="percentage" min="0" max="100" step="0.1" placeholder="مثال: 85.5" required>
+                    </div>
+
+                    <button type="submit" class="btn">تحليل الفرص والجامعات المتاحة 🔍</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 3. النتائج واختبار الميول (Results & Quiz View) -->
+        <section id="view-results" class="view">
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card-header">
+                    <h2>🎓 التخصصات والجامعات المؤهلة</h2>
+                </div>
+                <div id="officialDataNotice" class="official-data-notice">
+                    <div class="official-data-title">📚 مصدر بيانات القبول وتحديث الشروط</div>
+                    <div>المصدر الرسمي المرجعي: <strong>الإدارة العامة للقبول وتقويم وتوثيق الشهادات - وزارة التعليم العالي والبحث العلمي السودانية</strong>.</div>
+                    <div class="official-data-warning">⚠️ النسبة وحدها لا تكفي لإثبات الأهلية؛ القبول للبكالوريوس يشترط كذلك النجاح في المواد المؤهلة المطلوبة، ويجب مراجعة دليل المنافسة الرسمي قبل التقديم.</div>
+                    <a href="https://daleel.admission.gov.sd/" target="_blank" rel="noopener">فتح دليل القبول الرسمي ↗</a>
+                </div>
+                <div id="resultsInfo"></div>
+                    <div class="official-data-warning" style="margin-top:10px;">📌 ملاحظة: نتيجة المنصة إرشادية. دليل 2026–2027 يوضح أن أهلية البكالوريوس لا تعتمد على النسبة فقط، بل على المواد الإجبارية والمواد المؤهلة الخاصة بالتخصص أيضاً.</div>
+            </div>
+
+            <!-- Search Light & Dropdown -->
+            <div class="search-box-card">
+                <div class="search-box-title">
+                    🔍 البحث المباشر عن تخصص (لمبة بيان التأهل):
+                </div>
+                <div class="search-wrapper">
+                    <div class="search-input-container">
+                        <input type="text" id="customSearchInput" class="search-input" placeholder="اكتب اسم التخصص..." oninput="handleSearchTyping(this.value)" autocomplete="off">
+                        <div id="suggestionsList" class="suggestions-list"></div>
+                    </div>
+                    <button id="searchLightBtn" class="search-btn-indicator" onclick="executeSearchAction()">
+                        <span class="status-dot"></span>
+                        <span id="searchBtnText">ابحث</span>
+                    </button>
+                </div>
+                <div id="searchFeedback" class="search-feedback"></div>
+            </div>
+
+            <div class="results-toolbar">
+                <button class="tool-btn" type="button" onclick="window.print()">🖨️ طباعة النتائج</button>
+                <button class="tool-btn" type="button" onclick="clearStudentData()">🔄 تغيير البيانات</button>
+            </div>
+            <div id="resultsSummary"></div>
+
+            <div id="majorsContainer" class="majors-grid"></div>
+
+            <!-- قسم المساقات الأخرى المؤهل لها الطالب بناءً على ضوابط القبول العام -->
+            <div class="cross-track-card" id="crossTrackFeature" style="display:none;">
+                <button class="cross-track-btn" id="openCrossTrackBtn" type="button">🔎 التخصصات المؤهل لها في مساقات أخرى (غير المساق الأساسي)</button>
+                <div id="crossTrackPanel" class="cross-track-panel"></div>
+            </div>
+
+            <div id="quizAction" class="quiz-action" style="display: none;">
+                <button id="startQuizBtn" class="btn btn-dark">ابدأ اختبار الميول الأكاديمي لتحديد الأنسب لك 📝</button>
+            </div>
+
+            <div id="quizSection" class="card" style="display: none; margin-top: 1.5rem;">
+                <div class="card-header">
+                    <h2>🧠 اختبار الميول الأكاديمية والمهنية الموسّع</h2>
+                </div>
+                <p style="color: #64748B; font-size: 0.92rem; margin-bottom: 1.2rem; line-height: 1.7;">هذا الاختبار لا يعتمد على النسبة فقط؛ بل يحلل شخصيتك وميولك وطريقة تفكيرك، ثم يربطها بطبيعة كل تخصص. النتيجة النهائية تجمع بين <strong>التوافق الشخصي</strong> و<strong>أهلية القبول</strong>.</p>
+                <div id="quizContainer"></div>
+                <button id="submitQuizBtn" class="btn" style="margin-top: 1.2rem;">تحليل شخصيتي وربطها بالتخصصات 🧠🏆</button>
+                <div id="quizResult" class="quiz-result" style="display: none;"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" id="nav-home" onclick="switchView('home')">
+            <span class="icon">🏠</span>
+            <span>الرئيسية</span>
+        </button>
+        <button class="nav-item" id="nav-percentage" onclick="switchView('percentage')">
+            <span class="icon">📊</span>
+            <span>إدخال النسبة</span>
+        </button>
+        <button class="nav-item" id="nav-results" onclick="switchView('results')">
+            <span class="icon">🎓</span>
+            <span>النتائج والجامعات</span>
+        </button>
+    </nav>
+
+    <script>
+        const admissionDataMeta = {
+            sourceName: "الإدارة العامة للقبول وتقويم وتوثيق الشهادات - وزارة التعليم العالي والبحث العلمي - السودان",
+            sourceUrl: "https://daleel.admission.gov.sd/",
+            currentGuide: "2026 - 2027م",
+            verificationNote: "حدود المنافسة المؤسسية الظاهرة في قاعدة المنصة هي بيانات مرجعية داخلية؛ لا تعتبر الترشيح النهائي ولا تغني عن مراجعة دليل المنافسة والمواد المؤهلة الرسمي."
+        };
+
+        const database = {
+            cs: {
+                name: "علمي حاسوب وهندسة البرمجيات",
+                majors: [
+                    {
+                        id: "cs_sci",
+                        name: "علوم الحاسوب (Computer Science)",
+                        degree: "bach",
+                        duration: "4 سنوات (بكالوريوس شرف)",
+                        desc: "دراسة لغات البرمجة، الخوارزميات، الذكاء الاصطناعي، الأمن السيبراني، وتطوير الأنظمة المعقدة.",
+                        market: "طلب مرتفع جداً محلياً وإقليمياً، العمل كمهندس برمجيات، مطور تطبيقات، أخصائي ذكاء اصطناعي، أو العمل الحر (Freelancing).",
+                        question: "هل تستمتع بالتفكير التحليلي، كتابة الأكواد، وحل المشكلات البرمجية والرياضية؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 82.0, type: "gov" },
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 78.5, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 71.0, type: "gov" },
+                            { name: "جامعة أم درمان الإسلامية (حكومية)", min: 68.0, type: "gov" },
+                            { name: "جامعة العلوم والتكنولوجيا (خاصة)", min: 65.0, type: "priv" },
+                            { name: "جامعة ابن سينا (خاصة)", min: 60.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "swe",
+                        name: "هندسة البرمجيات (Software Engineering)",
+                        degree: "bach",
+                        duration: "5 سنوات (بكالوريوس شرف)",
+                        desc: "التركيز على دورة حياة تطوير البرمجيات الضخمة، الممارسات الهندسية، إدارة جودة الأنظمة ومشاريع التقنية.",
+                        market: "مطلوب بشكل مباشر في شركات حلول البرمجيات، البنوك، الشركات الناشئة، وإدارة المنتجات الرقمية.",
+                        question: "هل تفضل إدارة مشاريع التطبيقات وتصميم الأنظمة البرمجية المتكاملة من الصفر؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 85.0, type: "gov" },
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 80.0, type: "gov" },
+                            { name: "جامعة بحري (حكومية)", min: 73.0, type: "gov" },
+                            { name: "جامعة مامون بحيري / المستقبل (خاصة)", min: 65.0, type: "priv" },
+                            { name: "جامعة سودان العالمية (خاصة)", min: 62.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "it",
+                        name: "تقنية المعلومات (Information Technology)",
+                        degree: "bach",
+                        duration: "4 سنوات (بكالوريوس شرف)",
+                        desc: "إدارة وتأمين البنية التحتية الرقمية، شبكات الحاسوب، قواعد البيانات، والدعم الفني للمؤسسات.",
+                        market: "فرص واسعة في كافة مؤسسات القطاع العام والخاص كمهندس شبكات، مدير قواعد بيانات، أو مسؤول أمن معلومات.",
+                        question: "هل تهتم بتجهيز وإدارة الشبكات، حماية قواعد البيانات، وإدارة السيرفرات؟",
+                        unis: [
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 75.0, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 68.0, type: "gov" },
+                            { name: "جامعة الخرطوم - القبول الخاص (حكومية)", min: 70.0, type: "gov" },
+                            { name: "كلية الفجر للعلوم والتكنولوجيا (خاصة)", min: 60.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "dip_cs",
+                        name: "دبلوم علوم الحاسوب وتقنية المعلومات",
+                        degree: "dip",
+                        duration: "3 سنوات (دبلوم تقني)",
+                        desc: "دراسة التطبيقات البرمجية الأساسية، الصيانة والتأهيل الفني، وإدارة شبكات الحاسوب المصغرة.",
+                        market: "دعم فني، تقني شبكات، إدخال ومعالجة البيانات، وصيانة الحاسوب.",
+                        question: "هل ترغب في التأهيل الفني والتقني السريع للانخراط المباشر في سوق صيانة وتشغيل الأنظمة؟",
+                        unis: [
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 58.0, type: "gov" },
+                            { name: "جامعة النيلين - كلية المجتمع (حكومية)", min: 52.0, type: "gov" },
+                            { name: "كلية أرباب للتقنية (خاصة)", min: 50.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "dip_net",
+                        name: "دبلوم شبكات الحاسوب والاتصالات",
+                        degree: "dip",
+                        duration: "3 سنوات (دبلوم تقني)",
+                        desc: "التطبيق العملي لتركيب وصيانة شبكات LAN/WAN، وإدارة أجهزة الراوترات والسويتشات.",
+                        market: "فني شبكات في المؤسسات والمصانع وشركات الاتصالات.",
+                        question: "هل تجد شغفك في التوصيلات الشبكية والتعامل المباشر مع أجهزة السويتش والراوتر؟",
+                        unis: [
+                            { name: "جامعة السودان - كلية التكنولوجيا (حكومية)", min: 60.0, type: "gov" },
+                            { name: "جامعة الزعيم الأزهري (حكومية)", min: 54.0, type: "gov" }
+                        ]
+                    }
+                ]
+            },
+            bio: {
+                name: "علمي أحياء (العلوم الطبية والصحية)",
+                majors: [
+                    {
+                        id: "med",
+                        name: "الطب البشري والجراحة (MBBS)",
+                        degree: "bach",
+                        duration: "6 سنوات (شاملة الامتياز)",
+                        desc: "دراسة علوم التشخيص، الفسيولوجيا، الأمراض الباطنية والجراحية، ورعاية صحة الإنسان المباشرة.",
+                        market: "فرص مستمرة في المستشفيات الحكومية والخاصة، المراكز البحثية، والعمل الخارجي.",
+                        question: "هل لديك شغف ورغبة قوية في تشخيص الأمراض والعناية المباشرة بحياة المرضى والصبر على سنوات الدراسة؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 93.5, type: "gov" },
+                            { name: "جامعة الجزيرة (حكومية)", min: 92.0, type: "gov" },
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 90.5, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 88.0, type: "gov" },
+                            { name: "جامعة شندي / الزعيم الأزهري (حكومية)", min: 86.5, type: "gov" },
+                            { name: "جامعة العلوم الطبية والتكنولوجيا UMT (خاصة)", min: 82.0, type: "priv" },
+                            { name: "جامعة ابن سينا (خاصة)", min: 78.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "dent",
+                        name: "طب وجراحة الفم والأسنان",
+                        degree: "bach",
+                        duration: "5 سنوات (بالإضافة لسنة الامتياز)",
+                        desc: "التخصص في صحة الفم والأسنان، الجراحات التقويمية والتعويضية، والعلاجات التجميلية للأسنان.",
+                        market: "إمكانية فتح عيادة خاصة، العمل بالمستشفيات التخصصية والمراكز الاستشارية.",
+                        question: "هل تمتلك دقة اليدين والمهارة الفنية العالية مع الاهتمام بالتفاصيل المجهرية والدقيقة؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 91.0, type: "gov" },
+                            { name: "جامعة أم درمان الإسلامية (حكومية)", min: 85.0, type: "gov" },
+                            { name: "جامعة العلوم الطبية UMT (خاصة)", min: 78.0, type: "priv" },
+                            { name: "جامعة ابن سينا (خاصة)", min: 72.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "pharm",
+                        name: "الصيدلة (Pharmacy / PharmD)",
+                        degree: "bach",
+                        duration: "5 سنوات (بكالوريوس شرف)",
+                        desc: "تركيب الأدوية، الكيمياء الدوائية، حركية الدواء في الجسم، والتركيبات الصيدلانية الجينية الحديثة.",
+                        market: "شركات الأدوية والمصانع، صيدليات المجتمع، الرقابة الدوائية، والمستشفيات كصيدلي سريري.",
+                        question: "هل تستهويك الكيمياء والعلوم البيولوجية ومعرفة كيفية تأثير المركبات الدوائية على الجسم؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 89.0, type: "gov" },
+                            { name: "جامعة الجزيرة (حكومية)", min: 87.0, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 83.0, type: "gov" },
+                            { name: "جامعة الوطنية - الخرطوم (خاصة)", min: 75.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "labs",
+                        name: "العلوم المختبرية الطبية",
+                        degree: "bach",
+                        duration: "4 إلى 5 سنوات",
+                        desc: "التحاليل الطبية الشاملة، علم الأحياء الدقيقة، الأحياء الجزيئية، وعلم أمراض الدم والأنسجة.",
+                        market: "إدارة المختبرات التشخيصية، بنوك الدم، مراكز أبحاث الجينات، والطب الشرعي.",
+                        question: "هل تفضل العمل البحثي والمخبري والتعامل مع الأجهزة التشخيصية خلف الكواليس؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 85.0, type: "gov" },
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 82.0, type: "gov" },
+                            { name: "جامعة الزعيم الأزهري (حكومية)", min: 78.0, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 75.0, type: "gov" }
+                        ]
+                    },
+                    {
+                        id: "nursing",
+                        name: "التمريض العالي والعلوم التمريضية",
+                        degree: "bach",
+                        duration: "4 سنوات (بكالوريوس)",
+                        desc: "تقديم الرعاية الصحي الشاملة، الإسعافات الأولية، العناية المكثفة، وتطبيق البروتوكولات الطبية.",
+                        market: "طلب عالمي ومحلي مرتفع في جميع المستشفيات والمراكز العلاجية والمنظمات الدولية.",
+                        question: "هل تملك روح التعاطف والرغبة في المساعدة المباشرة للمرضى والرعاية الصحية المستمرة؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 78.0, type: "gov" },
+                            { name: "جامعة الجزيرة (حكومية)", min: 74.0, type: "gov" },
+                            { name: "جامعة أم درمان الإسلامية (حكومية)", min: 68.0, type: "gov" },
+                            { name: "جامعة الرازي (خاصة)", min: 60.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "dip_pharm",
+                        name: "دبلوم الصيدلة ومساعد صيدلي",
+                        degree: "dip",
+                        duration: "3 سنوات (دبلوم تقني)",
+                        desc: "تأهيل مساعدي الصيدالة في صرف الأدوية، التعامل مع المخزون الصيدلاني، وقراءة الوصفات.",
+                        market: "مساعد صيدلي في الصيدليات العامة والمستشفيات والشركات الموزعة للأدوية.",
+                        question: "هل ترغب في دراسة الأدوية الأساسية والعمل المباشر في إدارة وتجهيز الصيدليات؟",
+                        unis: [
+                            { name: "جامعة أم درمان الإسلامية (حكومية)", min: 62.0, type: "gov" },
+                            { name: "كلية الرازي (خاصة)", min: 55.0, type: "priv" },
+                            { name: "جامعة المغتربين (خاصة)", min: 50.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "dip_labs",
+                        name: "دبلوم المختبرات الطبية",
+                        degree: "dip",
+                        duration: "3 سنوات (دبلوم تقني)",
+                        desc: "إجراء التحاليل الروتينية الطبية، سحب العينات، وصيانة أجهزة المختبرات الأولية.",
+                        market: "فني مختبرات في المستوصفات والمختبرات الخاصة والحكومية.",
+                        question: "هل تفضل التطبيق العملي للتحاليل والمختبرات الطبية في فترة دراسية أسرع؟",
+                        unis: [
+                            { name: "جامعة النيلين (حكومية)", min: 60.0, type: "gov" },
+                            { name: "جامعة بحري (حكومية)", min: 56.0, type: "gov" },
+                            { name: "كلية نماء العلوم (خاصة)", min: 50.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "dip_nurs",
+                        name: "دبلوم التمريض والإسعافات الأولية",
+                        degree: "dip",
+                        duration: "2.5 إلى 3 سنوات",
+                        desc: "تقديم الخدمات التمريضية الأساسية، متابعة علامات المريض الحيوية، والمساعدة في غرف الطوارئ.",
+                        market: "فني تمريض بالمستشفيات، المراكز الصحية، والعيادات الخارجية.",
+                        question: "هل ترغب في تقديم خدمات الرعاية الأولية والتمريض السريع في القطاع الصحي؟",
+                        unis: [
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 55.0, type: "gov" },
+                            { name: "جامعة الزعيم الأزهري (حكومية)", min: 52.0, type: "gov" }
+                        ]
+                    }
+                ]
+            },
+            eng: {
+                name: "علمي هندسية",
+                majors: [
+                    {
+                        id: "elec_comm",
+                        name: "هندسة الاتصالات والألياف الضوئية",
+                        degree: "bach",
+                        duration: "5 سنوات (بكالوريوس شرف)",
+                        desc: "أنظمة الإرسال والاستقبال، الاتصالات اللاسلكية، شبكات الألياف الضوئية (Optical Fiber)، المعالجة الرقمية للإشارات، وأنظمة الميكروويف.",
+                        market: "طلب ممتاز في شركات الاتصالات (سوداني، زين، أريج)، شركات خدمات البنية التحتية، وإدارة شبكات البيانات الإقليمية.",
+                        question: "هل تستهويك كيفية نقل البيانات عبر الألياف الضوئية، الموجات اللاسلكية، وبناء شبكات الاتصال؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 88.0, type: "gov" },
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 84.0, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 76.0, type: "gov" },
+                            { name: "جامعة المستقبل (خاصة)", min: 65.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "petroleum",
+                        name: "هندسة النفط والتعدين",
+                        degree: "bach",
+                        duration: "5 سنوات (بكالوريوس شرف)",
+                        desc: "استكشاف وحفر آبار النفط والغاز، إدارة الحقول النفطية، استخراج وتكرير المعادن والموارد الطبيعية.",
+                        market: "شركات إنتاج واستكشاف النفط، شركات خدمات الحفر العالمية، وهيئات الجيولوجيا والتعدين.",
+                        question: "هل تستهويك مجالات الاستكشاف النفطي، عمليات الحفر، وإدارة الموارد الطبيعية والتعدين؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 89.0, type: "gov" },
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 85.5, type: "gov" },
+                            { name: "جامعة المجلد / كردفان (حكومية)", min: 76.0, type: "gov" },
+                            { name: "جامعة سودان العالمية (خاصة)", min: 63.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "civil",
+                        name: "الهندسة المدنية والإنشائية",
+                        degree: "bach",
+                        duration: "5 سنوات (بكالوريوس شرف)",
+                        desc: "تصميم وتنفيذ المباني الخرسانية، الجسور، الطرق، السدود، والمشاريع الإنشائية والتخطيط العمراني.",
+                        market: "شركات المقاولات، الاستشارات الهندسية، وزارات البنية التحتية، والمشاريع العمرانية.",
+                        question: "هل تحب حساب الأحمال الإنشائية ورؤية تصاميم المباني والجسور تتحقق على أرض الواقع؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 89.5, type: "gov" },
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 85.0, type: "gov" },
+                            { name: "جامعة وادي النيل (حكومية)", min: 74.0, type: "gov" },
+                            { name: "كلية غردون العالمية (خاصة)", min: 62.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "mech",
+                        name: "الهندسة الميكانيكية والميكاترونكس",
+                        degree: "bach",
+                        duration: "5 سنوات (بكالوريوس شرف)",
+                        desc: "تصميم الآلات، أنظمة التكييف والتبريد، المحركات، الربط بين الميكانيكا والبرمجة والإلكترونيات (الميكاترونكس).",
+                        market: "مصانع التجميع، شركات النفط، صيانة الطائرات والمعدات الثقيلة، والأنظمة المدمجة والروبوتات.",
+                        question: "هل يستهويك فهم حركة الآلات والمحركات والجمع بين التصميم الميكانيكي والتحكم الإلكتروني؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 87.0, type: "gov" },
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 83.0, type: "gov" },
+                            { name: "جامعة بحري (حكومية)", min: 75.0, type: "gov" }
+                        ]
+                    },
+                    {
+                        id: "architecture",
+                        name: "الهندسة المعمارية والعمائر",
+                        degree: "bach",
+                        duration: "5 سنوات (بكالوريوس شرف)",
+                        desc: "التصميم المعماري، تخطيط المساحات، المخططات ثلاثية الأبعاد، وتصميم المباني الحديثة والجمالية.",
+                        market: "مكاتب الاستشارات المعمارية، التطوير العقاري، الديكور والإنشاءات.",
+                        question: "هل تمتلك الحس الفني المعماري والقدرة على تخطيط وتصميم المساحات والمباني بجمالية؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 90.0, type: "gov" },
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 86.0, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 78.0, type: "gov" },
+                            { name: "جامعة العلوم والتكنولوجيا (خاصة)", min: 68.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "dip_civil",
+                        name: "دبلوم الهندسة المدنية والإنشاءات",
+                        degree: "dip",
+                        duration: "3 سنوات (دبلوم تقني)",
+                        desc: "الإشراف الميداني على المواقع الإنشائية، مساحة الأراضي، وقراءة المخططات الإنشائية.",
+                        market: "مراقب موقع إنشائي، مساح أراضي، وفني تنفيذ بمؤسسات المقاولات.",
+                        question: "هل تفضل العمل الميداني المباشر في مواقع البناء والإشراف الإنشائي؟",
+                        unis: [
+                            { name: "جامعة السودان - كلية التكنولوجيا (حكومية)", min: 62.0, type: "gov" },
+                            { name: "جامعة أم درمان الإسلامية (حكومية)", min: 55.0, type: "gov" }
+                        ]
+                    },
+                    {
+                        id: "dip_mech",
+                        name: "دبلوم الهندسة الميكانيكية وصيانة السيارات",
+                        degree: "dip",
+                        duration: "3 سنوات (دبلوم تقني)",
+                        desc: "تشغيل وصيانة الآلات الميكانيكية، أنظمة التكييف والتبريد، وأنظمة المحركات الحديثة.",
+                        market: "فني صيانة محركات، مشرف خطوط إنتاج بالمصانع، وفني أنظمة تكييف.",
+                        question: "هل ترغب في اكتساب مهارات عملية سريعة في صيانة وتشغيل الآلات والمحركات؟",
+                        unis: [
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 60.0, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 54.0, type: "gov" }
+                        ]
+                    },
+                    {
+                        id: "dip_elec",
+                        name: "دبلوم الهندسة الكهربائية والتركيبات",
+                        degree: "dip",
+                        duration: "3 سنوات (دبلوم تقني)",
+                        desc: "التركيبات الكهربائية الصناعية والمنازل، صيانة اللوحات الكهربائية والمولدات.",
+                        market: "فني كهرباء بالمصانع والشركات والمؤسسات الخدمية.",
+                        question: "هل تستهويك التركيبات الكهربائية وتمديد اللوحات وصيانة المولدات؟",
+                        unis: [
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 61.0, type: "gov" },
+                            { name: "جامعة بحري (حكومية)", min: 53.0, type: "gov" }
+                        ]
+                    }
+                ]
+            },
+            lit: {
+                name: "أدبي دراسات وعلوم إنسانية",
+                majors: [
+                    {
+                        id: "law",
+                        name: "القانون والشريعة الإسلامية",
+                        degree: "bach",
+                        duration: "4 سنوات (بكالوريوس شرف)",
+                        desc: "دراسة القانون الجنائي، المدني، التجاري، المرافعة القضائية، التشريعات الدولية والشرعية.",
+                        market: "المحاماة، السلطة القضائية، الاستشارات القانونية للشركات والبنوك، والسلك الدبلوماسي.",
+                        question: "هل تمتلك قوة الحجة، التحليل النصي، والقدرة على الدفاع عن الحقوق وصياغة العقود؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 86.0, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 78.0, type: "gov" },
+                            { name: "جامعة أم درمان الإسلامية (حكومية)", min: 73.0, type: "gov" },
+                            { name: "جامعة الأحفاد للبنات (خاصة)", min: 60.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "econ",
+                        name: "الاقتصاد والعلوم الإدارية والمالية",
+                        degree: "bach",
+                        duration: "4 سنوات (بكالوريوس شرف)",
+                        desc: "دراسة الأسواق المالية، إدارة الأعمال، التسويق الرقمي، المحاسبة المالية، والتخطيط الاقتصادي.",
+                        market: "البنوك، المؤسسات المالية، شركات الاستثمار، إدارة العلامات التجارية، والمشاريع الريادية.",
+                        question: "هل لديك اهتمام بإدارة المال، تحليل أسواق الأعمال، وإدارة المشاريع المؤسسية؟",
+                        unis: [
+                            { name: "جامعة الخرطوم - كلية الاقتصاد (حكومية)", min: 84.0, type: "gov" },
+                            { name: "جامعة السودان - علوم إدارة (حكومية)", min: 76.0, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 68.0, type: "gov" },
+                            { name: "جامعة العلوم والتكنولوجيا (خاصة)", min: 58.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "media",
+                        name: "الإعلام والاتصال الجماهيري",
+                        degree: "bach",
+                        duration: "4 سنوات (بكالوريوس شرف)",
+                        desc: "الصحافة الرقمية، الإذاعة والتلفزيون، العلاقات العامة، صناعة المحتوى، والإنتاج الصوتي والمرئي.",
+                        market: "القنوات الفضائية، المنصات الرقمية، وكالات الإعلان، وإدارة العلاقات العامة.",
+                        question: "هل تستهويك الكتابة الإعلامية، التقديم، الإخراج الصوتي والمرئي، وصناعة المحتوى؟",
+                        unis: [
+                            { name: "جامعة الخرطوم (حكومية)", min: 81.0, type: "gov" },
+                            { name: "جامعة أم درمان الإسلامية - كلية الإعلام (حكومية)", min: 72.0, type: "gov" },
+                            { name: "جامعة السودان للعلوم والتكنولوجيا (حكومية)", min: 70.0, type: "gov" },
+                            { name: "كلية البيان لعلم الاتصال (خاصة)", min: 58.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "dip_admin",
+                        name: "دبلوم إدارة الأعمال والتسويق",
+                        degree: "dip",
+                        duration: "2.5 إلى 3 سنوات",
+                        desc: "أساسيات المحاسبة، المبيعات والتسويق، وإدارة المكتبات والخدمات الإدارية.",
+                        market: "مساعد إداري، موظف خدمة عملاء، ومسؤول مبيعات.",
+                        question: "هل ترغب في بدء مسارك المهني سريعاً في إدارة المكتب والمبيعات والتنظيم الإداري؟",
+                        unis: [
+                            { name: "جامعة السودان - كلية المجتمع (حكومية)", min: 54.0, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 50.0, type: "gov" }
+                        ]
+                    },
+                    {
+                        id: "dip_bank",
+                        name: "دبلوم الدراسات المصرفية والمالية",
+                        degree: "dip",
+                        duration: "3 سنوات (دبلوم تقني)",
+                        desc: "العمليات المصرفية، الحسابات والتمويل، والتعامل مع النظام البنكي المالي.",
+                        market: "صراف، موظف استقبال بالبنوك والمؤسسات التمويلية.",
+                        question: "هل تستهويك الحسابات المالية اليومية والعمل المباشر بالبنوك والمصارف؟",
+                        unis: [
+                            { name: "أكاديمية الدراسات المصرفية (حكومية)", min: 56.0, type: "gov" },
+                            { name: "جامعة أم درمان الإسلامية (حكومية)", min: 52.0, type: "gov" }
+                        ]
+                    }
+                ]
+            },
+            arts: {
+                name: "أدبي فنون وتصميم",
+                majors: [
+                    {
+                        id: "design",
+                        name: "التصميم الجرافيكي والهوية البصرية (Graphic & Visual Design)",
+                        degree: "bach",
+                        duration: "4 سنوات (بكالوريوس شرف)",
+                        desc: "تصميم الهويات البصرية للشركات، المطبوعات، تصميم واجهات المستخدم UI/UX، المونتاج، والرسوم المتحركة.",
+                        market: "طلب مرتفع جداً في استوديوهات التصميم، وكالات الإعلان، والعمل الحر (Freelancing).",
+                        question: "هل تجد شغفك في الرسم، ابتكار اللوجوهات، اختيار الألوان والتعبير البصري والفني؟",
+                        unis: [
+                            { name: "جامعة السودان - كلية الفنون الجميلة (حكومية)", min: 72.0, type: "gov" },
+                            { name: "جامعة النيلين (حكومية)", min: 65.0, type: "gov" },
+                            { name: "جامعة المستقبل - التصميم (خاصة)", min: 55.0, type: "priv" }
+                        ]
+                    },
+                    {
+                        id: "fine_art",
+                        name: "الفنون الجميلة والتشكيلية",
+                        degree: "bach",
+                        duration: "4 سنوات (بكالوريوس شرف)",
+                        desc: "الرسم التشكيلي، النحت، الخزف، النسيج، والترميم الفني والتاريخي.",
+                        market: "المعارض الفنية، التدريس الأكاديمي، الاستشارات الديكورية، والمؤسسات الثقافية.",
+                        question: "هل تحب رسم الفنون التشكيلية والتعبير عن الأفكار الاجتماعية عبر المجسمات واللوحات؟",
+                        unis: [
+                            { name: "جامعة السودان - الفنون الجميلة (حكومية)", min: 68.0, type: "gov" },
+                            { name: "جامعة السودان - القبول الخاص (حكومية)", min: 60.0, type: "gov" }
+                        ]
+                    },
+                    {
+                        id: "dip_design",
+                        name: "دبلوم التصميم الجرافيكي والإعلان",
+                        degree: "dip",
+                        duration: "2.5 سنة (دبلوم تقني)",
+                        desc: "التطبيق والتنفيذ المباشر لتصاميم الفوتوشوب، الإليستريتور، والمطبوعات الإعلانية.",
+                        market: "مصمم جرافيك بمطابع الدعاية، استوديوهات التصوير، والعمل الحر.",
+                        question: "هل ترغب في تعلم برامج التصميم والإعلان والتطبيق الفني السريع للعمل الحر؟",
+                        unis: [
+                            { name: "جامعة السودان - كلية الفنون (حكومية)", min: 55.0, type: "gov" },
+                            { name: "كلية الخرطوم التطبيقية (خاصة)", min: 50.0, type: "priv" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+
+        /*
+         * فهرس موسّع للتخصصات التي لا توجد لها حالياً بيانات منافسة مؤسسية كاملة داخل قاعدة المنصة.
+         * تمت إضافتها لتظهر في البحث والفهرسة، لكن لا تُحسب كـ"مؤهلة" بالنسبـة وحدها حتى لا يتم
+         * إعطاء الطالب حكماً غير موثق. يجب مراجعة دليل المنافسة والمواد المؤهلة الرسميين.
+         */
+        const supplementalMajors = {
+            cs: [
+                {id:'cs_engineering', name:'هندسة الحاسوب', degree:'bach', duration:'5 سنوات', desc:'تصميم العتاد والبرمجيات والأنظمة المدمجة والشبكات الحاسوبية.', market:'أنظمة مدمجة، شبكات، أجهزة، بنية تحتية وحلول تقنية.', question:'هل تهتم بالجمع بين البرمجة والإلكترونيات والعتاد الحاسوبي؟'},
+                {id:'info_systems', name:'نظم المعلومات', degree:'bach', duration:'4 سنوات', desc:'تحليل وتصميم نظم المعلومات وقواعد البيانات وحلول المؤسسات الرقمية.', market:'تحليل الأعمال، نظم المؤسسات، قواعد البيانات وإدارة الأنظمة.', question:'هل تستمتع بتحويل احتياجات المؤسسة إلى نظام معلومات عملي؟'},
+                {id:'ai', name:'الذكاء الاصطناعي', degree:'bach', duration:'4 سنوات', desc:'التعلم الآلي، معالجة البيانات، الرؤية الحاسوبية والأنظمة الذكية.', market:'الذكاء الاصطناعي، تحليل البيانات، الأتمتة وتطوير الحلول الذكية.', question:'هل يثير اهتمامك تعلم الآلة وتحليل البيانات وبناء أنظمة ذكية؟'},
+                {id:'cyber', name:'الأمن السيبراني', degree:'bach', duration:'4 سنوات', desc:'حماية الشبكات والأنظمة والبيانات واكتشاف التهديدات والاستجابة لها.', market:'أمن المعلومات، SOC، اختبار الاختراق وإدارة المخاطر التقنية.', question:'هل تستمتع بتحليل الثغرات والدفاع عن الأنظمة والشبكات؟'},
+                {id:'data_science', name:'علم البيانات وتحليل البيانات', degree:'bach', duration:'4 سنوات', desc:'الإحصاء والبرمجة وتحليل البيانات وبناء النماذج لاتخاذ القرارات.', market:'تحليل البيانات، ذكاء الأعمال، النمذجة والتقارير الرقمية.', question:'هل تحب الأرقام وتحويل البيانات إلى معلومات تساعد في القرار؟'},
+                {id:'computer_info_security', name:'أمن المعلومات', degree:'bach', duration:'4 سنوات', desc:'تأمين المعلومات وإدارة الهوية والوصول والسياسات الأمنية.', market:'حوكمة وأمن المعلومات وإدارة المخاطر والامتثال.', question:'هل تهتم بحماية المعلومات والصلاحيات والخصوصية؟'},
+                {id:'multimedia_cs', name:'الوسائط المتعددة والتقنية الرقمية', degree:'bach', duration:'4 سنوات', desc:'دمج البرمجة والصوت والصورة والفيديو والتجارب الرقمية التفاعلية.', market:'المحتوى الرقمي، التعليم الإلكتروني، الوسائط التفاعلية والتطبيقات.', question:'هل تستمتع بالجمع بين التقنية والإبداع البصري والسمعي؟'},
+                {id:'dip_info_sys', name:'دبلوم نظم المعلومات', degree:'dip', duration:'3 سنوات', desc:'أساسيات قواعد البيانات والبرمجيات ونظم المعلومات المؤسسية.', market:'مساعد نظم، دعم تطبيقات وإدخال ومعالجة البيانات.', question:'هل تفضل مساراً تقنياً تطبيقياً في نظم المعلومات؟'},
+                {id:'dip_cyber', name:'دبلوم أمن المعلومات والشبكات', degree:'dip', duration:'3 سنوات', desc:'مبادئ الشبكات والحماية وإدارة الحسابات والأنظمة.', market:'فني دعم وأمن شبكات ومساعد مسؤول نظم.', question:'هل تحب العمل التطبيقي في الشبكات والحماية؟'}
+            ],
+            bio: [
+                {id:'vet', name:'الطب البيطري', degree:'bach', duration:'5 سنوات', desc:'تشخيص وعلاج أمراض الحيوان والوقاية منها والصحة الحيوانية.', market:'المستشفيات والعيادات البيطرية والثروة الحيوانية والصحة العامة.', question:'هل تهتم بصحة الحيوان والتعامل مع الحالات البيطرية؟'},
+                {id:'dental_tech', name:'تقانة الأسنان', degree:'bach', duration:'4 سنوات', desc:'التقنيات المعملية لصناعة التركيبات والأجهزة السنية ودعم خدمات طب الأسنان.', market:'معامل الأسنان والمراكز والعيادات والمختبرات المتخصصة.', question:'هل تحب العمل الدقيق اليدوي مع الأجهزة والمواد السنية؟'},
+                {id:'public_health', name:'الصحة العامة وصحة البيئة', degree:'bach', duration:'4 سنوات', desc:'الوقاية والصحة البيئية ومكافحة الأمراض والتوعية الصحية.', market:'المؤسسات الصحية والمنظمات والبرامج الوقائية والصحة البيئية.', question:'هل تهتم بالوقاية من الأمراض وصحة المجتمع أكثر من العلاج الفردي؟'},
+                {id:'physiotherapy', name:'العلاج الطبيعي والتأهيل', degree:'bach', duration:'4 سنوات', desc:'التأهيل الحركي والعلاج الطبيعي وإعادة الوظائف بعد الإصابات والأمراض.', market:'المستشفيات ومراكز التأهيل والعيادات الرياضية.', question:'هل تحب مساعدة الناس على استعادة الحركة والقدرة البدنية؟'},
+                {id:'radiology', name:'الأشعة والتصوير الطبي', degree:'bach', duration:'4 سنوات', desc:'تشغيل تقنيات التصوير الطبي ودعم إجراءات التشخيص الإشعاعي.', market:'أقسام الأشعة والتصوير الطبي ومراكز التشخيص.', question:'هل يهمك استخدام الأجهزة والتقنيات الطبية في التصوير والتشخيص؟'},
+                {id:'anesthesia', name:'التخدير والعناية الحرجة', degree:'bach', duration:'4 سنوات', desc:'تقنيات التخدير ومراقبة العلامات الحيوية ودعم الحالات الحرجة وفق اللوائح المهنية.', market:'المستشفيات وغرف العمليات والعناية الحرجة.', question:'هل تستطيع العمل بدقة وهدوء في بيئات طبية حساسة؟'},
+                {id:'clinical_nutrition', name:'التغذية العلاجية', degree:'bach', duration:'4 سنوات', desc:'التغذية الوقائية والعلاجية وتخطيط الحميات للحالات الصحية المختلفة.', market:'المستشفيات والعيادات ومراكز التغذية والصحة المجتمعية.', question:'هل تهتم بتأثير الغذاء والتغذية على الصحة والمرض؟'},
+                {id:'midwifery', name:'القبالة والعلوم التوليدية', degree:'bach', duration:'4 سنوات', desc:'الرعاية الصحية للحمل والولادة وما بعد الولادة وفق التدريب المهني.', market:'المستشفيات ومراكز الأمومة والصحة الإنجابية.', question:'هل تستهويك رعاية الأم والطفل في مراحل الحمل والولادة؟'},
+                {id:'optometry', name:'البصريات وعلوم النظر', degree:'bach', duration:'4 سنوات', desc:'فحوصات النظر الأساسية والخدمات البصرية والتقنيات المتعلقة بالبصر.', market:'مراكز البصريات والعيادات والخدمات البصرية.', question:'هل تهتم بدقة فحوصات النظر والأجهزة البصرية؟'},
+                {id:'occupational_therapy', name:'العلاج الوظيفي', degree:'bach', duration:'4 سنوات', desc:'تأهيل الأشخاص لتحسين قدرتهم على أداء أنشطة الحياة اليومية.', market:'مراكز التأهيل والمستشفيات وبرامج ذوي الإعاقة.', question:'هل تستمتع بتصميم أنشطة عملية تساعد الآخرين على الاستقلال؟'},
+                {id:'food_science', name:'علوم وتقانات الأغذية', degree:'bach', duration:'4 سنوات', desc:'سلامة الأغذية والتصنيع الغذائي والجودة والتغذية التطبيقية.', market:'مصانع الأغذية والمختبرات والرقابة والجودة.', question:'هل يهمك فهم تصنيع الغذاء وسلامته وجودته؟'},
+                {id:'agriculture', name:'الزراعة والإنتاج النباتي', degree:'bach', duration:'4 سنوات', desc:'إنتاج المحاصيل والبساتين وإدارة الموارد الزراعية والتقنيات الزراعية.', market:'المزارع والشركات الزراعية والإرشاد والبحوث.', question:'هل تحب العمل مع النباتات والإنتاج الزراعي والموارد الطبيعية؟'},
+                {id:'animal_production', name:'الإنتاج الحيواني', degree:'bach', duration:'4 سنوات', desc:'تربية وإدارة ورعاية الحيوانات وتحسين الإنتاج الحيواني.', market:'الثروة الحيوانية والمزارع وشركات الأعلاف والإنتاج.', question:'هل تهتم بتربية الحيوانات وتحسين إنتاجيتها؟'},
+                {id:'forestry', name:'الغابات والموارد الطبيعية', degree:'bach', duration:'4 سنوات', desc:'إدارة الغطاء النباتي والغابات والموارد الطبيعية وحمايتها.', market:'إدارة الموارد والبيئة والمنظمات والبحوث الزراعية.', question:'هل تميل للعمل في البيئة والموارد الطبيعية والحفاظ عليها؟'},
+                {id:'dip_dental_tech', name:'دبلوم تقانة الأسنان', degree:'dip', duration:'3 سنوات', desc:'التطبيق المعملي في صناعة التركيبات والأجهزة السنية.', market:'معامل الأسنان ومساعدات المختبرات السنية.', question:'هل تفضل العمل اليدوي الدقيق في معامل الأسنان؟'},
+                {id:'dip_radiology', name:'دبلوم الأشعة والتصوير الطبي', degree:'dip', duration:'3 سنوات', desc:'التطبيقات الفنية الأساسية للتصوير الطبي تحت الإشراف المهني.', market:'فني تصوير طبي ومساندة أقسام الأشعة.', question:'هل تحب تشغيل الأجهزة الطبية والعمل التطبيقي؟'},
+                {id:'dip_physio', name:'دبلوم العلاج الطبيعي', degree:'dip', duration:'3 سنوات', desc:'مبادئ التأهيل والعلاج الطبيعي والتدريبات الحركية التطبيقية.', market:'مراكز التأهيل والمرافق الصحية المساندة.', question:'هل تستمتع بالعمل العملي مع التمارين والحركة والتأهيل؟'}
+            ],
+            eng: [
+                {id:'electrical_engineering', name:'الهندسة الكهربائية', degree:'bach', duration:'5 سنوات', desc:'الطاقة والدوائر والأنظمة الكهربائية والتحكم.', market:'الطاقة والمرافق والصناعة والاتصالات والتحكم.', question:'هل تحب الدوائر والطاقة والأنظمة الكهربائية؟'},
+                {id:'electronics_engineering', name:'الهندسة الإلكترونية', degree:'bach', duration:'5 سنوات', desc:'الإلكترونيات والدوائر الرقمية والأنظمة والأجهزة الإلكترونية.', market:'التحكم والأجهزة والإلكترونيات والاتصالات.', question:'هل تستمتع بفهم الدوائر الإلكترونية وكيف تعمل الأجهزة؟'},
+                {id:'computer_engineering', name:'هندسة الحاسوب', degree:'bach', duration:'5 سنوات', desc:'الربط بين هندسة الحاسوب والبرمجيات والأنظمة المضمنة.', market:'الأنظمة المضمنة، العتاد والشبكات والحلول التقنية.', question:'هل تميل للجمع بين البرمجة والهندسة والعتاد؟'},
+                {id:'chemical_engineering', name:'الهندسة الكيميائية', degree:'bach', duration:'5 سنوات', desc:'عمليات الإنتاج والتصنيع والتحكم في العمليات الكيميائية.', market:'المصانع والطاقة والبتروكيماويات والصناعات التحويلية.', question:'هل تستمتع بالكيمياء وتحويلها إلى عمليات إنتاج صناعية؟'},
+                {id:'industrial_engineering', name:'الهندسة الصناعية', degree:'bach', duration:'5 سنوات', desc:'تحسين العمليات والجودة والإنتاج وسلاسل الإمداد والموارد.', market:'المصانع وإدارة الجودة والعمليات وسلاسل الإمداد.', question:'هل تحب تحليل العمليات وتقليل الهدر وتحسين الإنتاج؟'},
+                {id:'environmental_engineering', name:'الهندسة البيئية', degree:'bach', duration:'5 سنوات', desc:'حلول هندسية للمياه والنفايات والتلوث والاستدامة.', market:'البيئة والمياه والمشروعات والبنية التحتية.', question:'هل تهتم بحل المشكلات البيئية بأساليب هندسية؟'},
+                {id:'biomedical_engineering', name:'الهندسة الطبية الحيوية', degree:'bach', duration:'5 سنوات', desc:'الأجهزة الطبية والأنظمة الحيوية والربط بين الهندسة والطب.', market:'الأجهزة الطبية والصيانة والدعم الفني والتقنيات الصحية.', question:'هل يجذبك الجمع بين الهندسة والعلوم الطبية والأجهزة؟'},
+                {id:'surveying_engineering', name:'هندسة المساحة', degree:'bach', duration:'4–5 سنوات', desc:'الرفع المساحي ونظم الإحداثيات والخرائط وتقنيات تحديد المواقع.', market:'المساحة والإنشاءات والطرق والتخطيط ونظم المعلومات الجغرافية.', question:'هل تحب القياسات والخرائط والعمل الميداني الدقيق؟'},
+                {id:'water_resources', name:'هندسة المياه والموارد المائية', degree:'bach', duration:'5 سنوات', desc:'تصميم وإدارة شبكات المياه والمنشآت المائية والموارد.', market:'المياه والبنية التحتية والري والموارد الطبيعية.', question:'هل تهتم بالمياه والمنشآت وشبكات الإمداد؟'},
+                {id:'agricultural_engineering', name:'الهندسة الزراعية', degree:'bach', duration:'5 سنوات', desc:'الآلات والري والمنشآت والتقنيات الهندسية للإنتاج الزراعي.', market:'الزراعة والري والآلات والمشروعات الزراعية.', question:'هل تحب الجمع بين الهندسة والزراعة والتقنيات الميدانية؟'},
+                {id:'materials_engineering', name:'هندسة المواد', degree:'bach', duration:'5 سنوات', desc:'خصائص المواد واختيارها وتصنيعها واختبارها في التطبيقات الهندسية.', market:'الصناعة والمختبرات والجودة والتصنيع.', question:'هل يثير اهتمامك لماذا تتصرف المواد بشكل مختلف وكيف يتم تحسينها؟'},
+                {id:'dip_surveying', name:'دبلوم المساحة', degree:'dip', duration:'3 سنوات', desc:'أعمال الرفع المساحي والخرائط واستخدام أجهزة القياس.', market:'مكاتب المساحة والطرق والمقاولات.', question:'هل تفضل العمل الميداني مع القياسات والخرائط؟'},
+                {id:'dip_electronics', name:'دبلوم الإلكترونيات', degree:'dip', duration:'3 سنوات', desc:'تركيب وصيانة الدوائر والأجهزة الإلكترونية الأساسية.', market:'الصيانة والأجهزة والتحكم والدعم الفني.', question:'هل تستمتع بفك وتركيب وفحص الأجهزة الإلكترونية؟'},
+                {id:'dip_telecom', name:'دبلوم الاتصالات', degree:'dip', duration:'3 سنوات', desc:'أساسيات شبكات الاتصالات والنقل والإرسال وصيانة معدات الاتصال.', market:'شركات الاتصالات ومقاولي البنية التحتية.', question:'هل تهتم بكيفية انتقال الإشارة والبيانات عبر شبكات الاتصالات؟'},
+                {id:'dip_hvac', name:'دبلوم التكييف والتبريد', degree:'dip', duration:'3 سنوات', desc:'تشغيل وصيانة أنظمة التكييف والتبريد والضواغط.', market:'الصيانة والمرافق والتبريد والتكييف.', question:'هل تحب العمل الفني مع أنظمة التبريد والمعدات؟'}
+            ],
+            lit: [
+                {id:'accounting', name:'المحاسبة', degree:'bach', duration:'4 سنوات', desc:'المحاسبة المالية والتكاليف والمراجعة والأنظمة المالية.', market:'الشركات والبنوك والمراجعة والقطاع الحكومي.', question:'هل تميل للأرقام والدقة وإعداد التقارير المالية؟'},
+                {id:'business_admin', name:'إدارة الأعمال', degree:'bach', duration:'4 سنوات', desc:'الإدارة والتسويق والعمليات والموارد وإدارة المشاريع.', market:'الشركات والقطاع الإداري والمشروعات وريادة الأعمال.', question:'هل تستمتع بتنظيم العمل واتخاذ القرارات وإدارة المشروعات؟'},
+                {id:'banking_finance', name:'التمويل والمصارف', degree:'bach', duration:'4 سنوات', desc:'العمليات المصرفية والاستثمار والتمويل وإدارة المخاطر.', market:'البنوك والمؤسسات المالية والاستثمار.', question:'هل تستهويك البنوك والتمويل وتحليل المخاطر؟'},
+                {id:'marketing', name:'التسويق', degree:'bach', duration:'4 سنوات', desc:'سلوك المستهلك والتسويق الرقمي والعلامات التجارية والمبيعات.', market:'التسويق والمبيعات والإعلان والتجارة الإلكترونية.', question:'هل تحب فهم العملاء وتحويل الأفكار إلى حملات ومبيعات؟'},
+                {id:'hr', name:'إدارة الموارد البشرية', degree:'bach', duration:'4 سنوات', desc:'التوظيف والتدريب والأداء وعلاقات العمل وإدارة المواهب.', market:'الموارد البشرية والشركات والمؤسسات والمنظمات.', question:'هل تحب التعامل مع الناس وتنظيم فرق العمل والتطوير؟'},
+                {id:'mis', name:'نظم المعلومات الإدارية', degree:'bach', duration:'4 سنوات', desc:'ربط الإدارة بالتقنية والبيانات ونظم المعلومات المؤسسية.', market:'تحليل الأعمال ونظم المؤسسات والدعم الإداري التقني.', question:'هل تحب الجمع بين الإدارة والحاسوب والبيانات؟'},
+                {id:'arabic', name:'اللغة العربية وآدابها', degree:'bach', duration:'4 سنوات', desc:'اللغة والنحو والصرف والأدب والنقد والكتابة العربية.', market:'التعليم والتحرير والمحتوى والبحث الثقافي.', question:'هل تستمتع باللغة العربية والكتابة وتحليل النصوص؟'},
+                {id:'english', name:'اللغة الإنجليزية وآدابها', degree:'bach', duration:'4 سنوات', desc:'اللغة والأدب والترجمة ومهارات التواصل والكتابة.', market:'التعليم والترجمة والمحتوى وخدمة العملاء والاتصال.', question:'هل تحب اللغة الإنجليزية والقراءة والتواصل؟'},
+                {id:'french', name:'اللغة الفرنسية وآدابها', degree:'bach', duration:'4 سنوات', desc:'اللغة الفرنسية والأدب والترجمة والتواصل.', market:'التعليم والترجمة والاتصال والوظائف اللغوية.', question:'هل تستمتع بتعلم اللغة الفرنسية وثقافتها؟'},
+                {id:'psychology', name:'علم النفس', degree:'bach', duration:'4 سنوات', desc:'دراسة السلوك والعمليات النفسية والتطبيقات التعليمية والاجتماعية.', market:'التعليم والإرشاد والدعم النفسي والبحث حسب اللوائح المهنية.', question:'هل يثير اهتمامك فهم سلوك الإنسان ودوافعه؟'},
+                {id:'sociology', name:'علم الاجتماع', degree:'bach', duration:'4 سنوات', desc:'دراسة المجتمع والعلاقات والمؤسسات والتغيرات الاجتماعية.', market:'البحوث والمنظمات والتنمية والمجالات الاجتماعية.', question:'هل تحب فهم المجتمع والعلاقات والظواهر الاجتماعية؟'},
+                {id:'geography', name:'الجغرافيا والدراسات البيئية', degree:'bach', duration:'4 سنوات', desc:'الجغرافيا الطبيعية والبشرية والبيئة والخرائط والتحليل المكاني.', market:'التخطيط والبيئة والخرائط والبحوث.', question:'هل تهتم بالخرائط والمكان والبيئة والمجتمعات؟'},
+                {id:'history', name:'التاريخ والآثار', degree:'bach', duration:'4 سنوات', desc:'دراسة التاريخ والمصادر والحضارات والتراث والآثار.', market:'التعليم والبحوث والمتاحف والتراث.', question:'هل تستمتع بفهم الماضي وتحليل المصادر والأحداث؟'},
+                {id:'library_info', name:'المكتبات والمعلومات', degree:'bach', duration:'4 سنوات', desc:'تنظيم المعرفة وإدارة المكتبات والمعلومات والأرشفة الرقمية.', market:'المكتبات والأرشيف ومراكز المعلومات.', question:'هل تحب تنظيم المعلومات والبحث عنها واسترجاعها؟'},
+                {id:'tourism_hospitality', name:'السياحة وإدارة الضيافة', degree:'bach', duration:'4 سنوات', desc:'إدارة السياحة والفنادق وخدمات الضيافة والفعاليات.', market:'الفنادق والسياحة والفعاليات وخدمات الضيافة.', question:'هل تستمتع بالتعامل مع الناس وتنظيم الرحلات والفعاليات؟'},
+                {id:'education', name:'التربية وإعداد المعلمين', degree:'bach', duration:'4 سنوات', desc:'علوم التربية وطرق التدريس والمناهج والتقويم التعليمي.', market:'التعليم والمدارس والتدريب والتطوير التعليمي.', question:'هل تستمتع بشرح المعرفة ومساعدة الآخرين على التعلم؟'},
+                {id:'islamic_studies', name:'الدراسات الإسلامية', degree:'bach', duration:'4 سنوات', desc:'العلوم الإسلامية والفقه والتفسير والحديث والدعوة وفق البرنامج المعتمد.', market:'التعليم والبحث والإرشاد والمجالات الشرعية وفق اللوائح.', question:'هل تستمتع بدراسة العلوم الإسلامية والنصوص الشرعية؟'},
+                {id:'translation', name:'الترجمة', degree:'bach', duration:'4 سنوات', desc:'ترجمة النصوص وتحريرها ومهارات الترجمة المتخصصة واللغوية.', market:'الترجمة والتحرير وخدمات اللغات.', question:'هل تحب نقل المعنى بين اللغات بدقة؟'},
+                {id:'dip_accounting', name:'دبلوم المحاسبة', degree:'dip', duration:'3 سنوات', desc:'أساسيات المحاسبة المالية والتكاليف والحسابات.', market:'مساعد محاسب والحسابات والإدخال المالي.', question:'هل تحب الأرقام والدقة في الأعمال المالية؟'},
+                {id:'dip_hr', name:'دبلوم الموارد البشرية', degree:'dip', duration:'3 سنوات', desc:'أساسيات شؤون الموظفين والتوظيف والملفات والتدريب.', market:'مساعد موارد بشرية وشؤون موظفين.', question:'هل تميل لتنظيم ملفات الموظفين والتعامل مع الناس؟'},
+                {id:'dip_library', name:'دبلوم المكتبات والمعلومات', degree:'dip', duration:'3 سنوات', desc:'تنظيم المكتبات والأرشفة وخدمات المعلومات.', market:'المكتبات ومراكز المعلومات والأرشيف.', question:'هل تحب ترتيب الكتب والبيانات والمعلومات؟'},
+                {id:'dip_tourism', name:'دبلوم السياحة والفندقة', degree:'dip', duration:'3 سنوات', desc:'التشغيل الفندقي وخدمات الضيافة والسياحة الأساسية.', market:'الفنادق والسياحة والاستقبال وخدمات الضيافة.', question:'هل تحب خدمة العملاء وتنظيم الضيافة؟'}
+            ],
+            arts: [
+                {id:'interior_design', name:'التصميم الداخلي والديكور', degree:'bach', duration:'4 سنوات', desc:'تصميم الفراغات الداخلية والأثاث والإضاءة والخامات والتنسيق البصري.', market:'التصميم الداخلي والديكور والتطوير العقاري.', question:'هل تستمتع بتصميم الفراغات واختيار الألوان والخامات؟'},
+                {id:'fashion_design', name:'تصميم الأزياء والملابس', degree:'bach', duration:'4 سنوات', desc:'تصميم الأزياء والخامات والبترون وتطوير المنتجات.', market:'الأزياء والملابس والمشروعات الإبداعية.', question:'هل تحب الأزياء وتنسيق الأقمشة وتحويل الفكرة إلى منتج؟'},
+                {id:'multimedia_art', name:'الوسائط المتعددة والجرافيك المتحرك', degree:'bach', duration:'4 سنوات', desc:'الفيديو والرسوم المتحركة والصوت والتصميم الرقمي التفاعلي.', market:'الإنتاج المرئي والمحتوى الرقمي والإعلان.', question:'هل تستمتع بالفيديو والحركة والتصميم الرقمي؟'},
+                {id:'photography', name:'التصوير الفوتوغرافي', degree:'bach', duration:'4 سنوات', desc:'أسس التصوير والإضاءة والتكوين والمعالجة الرقمية.', market:'الإعلام والإعلان والاستوديوهات والمحتوى الرقمي.', question:'هل تستمتع بالتقاط الصور والضوء والتكوين؟'},
+                {id:'theatre', name:'المسرح والفنون الأدائية', degree:'bach', duration:'4 سنوات', desc:'التمثيل والإخراج والإنتاج المسرحي والفنون الأدائية.', market:'المسرح والإنتاج الثقافي والإعلامي والفعاليات.', question:'هل تحب التعبير الأدائي والعمل الجماعي على المسرح؟'},
+                {id:'music', name:'الموسيقى والفنون الصوتية', degree:'bach', duration:'4 سنوات', desc:'النظريات الموسيقية والأداء والتأليف والإنتاج الصوتي.', market:'الإنتاج الموسيقي والتعليم والفنون والثقافة.', question:'هل تشعر بانجذاب قوي للموسيقى والأداء الصوتي؟'},
+                {id:'animation', name:'الرسوم المتحركة', degree:'bach', duration:'4 سنوات', desc:'الرسم المتحرك والتحريك ثنائي وثلاثي الأبعاد والسرد البصري.', market:'الرسوم المتحركة والإعلان والألعاب والمحتوى.', question:'هل تحب تحويل الرسومات والأفكار إلى حركة وقصة؟'},
+                {id:'industrial_design', name:'التصميم الصناعي', degree:'bach', duration:'4 سنوات', desc:'تصميم المنتجات والأشكال الوظيفية والنماذج الأولية.', market:'تصميم المنتجات والتصنيع والتغليف والإبداع.', question:'هل تحب تصميم الأشياء والمنتجات بحيث تكون جميلة وعملية؟'},
+                {id:'fine_crafts', name:'الحرف والفنون التطبيقية', degree:'bach', duration:'4 سنوات', desc:'الخزف والنسيج والأشغال الفنية والتطبيقات الحرفية.', market:'المنتجات الحرفية والفنون التطبيقية والمشروعات الصغيرة.', question:'هل تستمتع بالأعمال اليدوية الدقيقة وتحويل الخامات إلى منتجات؟'},
+                {id:'dip_interior', name:'دبلوم التصميم الداخلي والديكور', degree:'dip', duration:'3 سنوات', desc:'أساسيات الرسم والفراغات والخامات والإخراج الداخلي.', market:'مساعد مصمم داخلي وديكور.', question:'هل تحب ترتيب الفراغات واختيار الألوان والخامات؟'},
+                {id:'dip_multimedia', name:'دبلوم الوسائط المتعددة', degree:'dip', duration:'3 سنوات', desc:'أساسيات الجرافيك والفيديو والصوت والمحتوى الرقمي.', market:'مساعد إنتاج محتوى ومصمم وسائط.', question:'هل تحب العمل العملي في التصميم والفيديو والمحتوى؟'},
+                {id:'dip_fashion', name:'دبلوم تصميم الأزياء والملابس', degree:'dip', duration:'3 سنوات', desc:'أساسيات البترون والخياطة وتصميم الملابس.', market:'مشروعات الأزياء والخياطة والإنتاج.', question:'هل تحب تصميم الملابس والعمل بالخامات؟'}
+            ]
+        };
+
+        Object.entries(supplementalMajors).forEach(([trackKey, list]) => {
+            if (!database[trackKey]) return;
+            const existingIds = new Set(database[trackKey].majors.map(m => m.id));
+            list.forEach(m => {
+                if (!existingIds.has(m.id)) {
+                    database[trackKey].majors.push({
+                        ...m,
+                        market: m.market || 'مجالات العمل تختلف حسب المؤسسة واللوائح المهنية.',
+                        source: 'فهرس موسّع مبني على مسميات المجالات/البرامج في دليل القبول 2026-2027م؛ تحقق من المؤسسة ودليل المنافسة قبل التقديم.',
+                        dataStatus: 'catalog',
+                        officialSubjects: 'تُراجع المواد المؤهلة الخاصة بالتخصص في دليل القبول الرسمي.'
+                    });
+                    existingIds.add(m.id);
+                }
+            });
+        });
+
+        const crossTrackRules = {
+            eng: [
+                {
+                    majorName: "علوم الحاسوب وتقنية المعلومات (من مساق علمي حاسوب)",
+                    originTrackName: "علمي حاسوب",
+                    degree: "bach",
+                    minReq: 68.0,
+                    desc: "البرمجة، تطوير الأنظمة، الذكاء الاصطناعي، والأمن السيبراني.",
+                    reason: "يؤهل له طالب علمي هندسية لاستيفاء مواد الفيزياء والرياضيات الأهلية للقبول في كليات الحاسوب.",
+                    source: "ضوابط القبول العام - الإدارة العامة للقبول (الشهادة السودانية - المساق العلمي)"
+                },
+                {
+                    majorName: "هندسة البرمجيات (من مساق علمي حاسوب)",
+                    originTrackName: "علمي حاسوب",
+                    degree: "bach",
+                    minReq: 72.0,
+                    desc: "تحليل وتصميم وبناء البرمجيات الضخمة والمشاريع التقنية.",
+                    reason: "متاح لطلاب علمي هندسية نظراً للتطابق العالي في مواد الفيزياء والرياضيات المتقدمة.",
+                    source: "ضوابط القبول العام - الإدارة العامة للقبول"
+                },
+                {
+                    majorName: "الصحة العامة وصحة البيئة (من مساق علمي أحياء)",
+                    originTrackName: "علمي أحياء",
+                    degree: "bach",
+                    minReq: 65.0,
+                    desc: "الوقاية، السلامة المهنية، إدارة البيئة والأنظمة الصحافية في المصانع والمنظمات.",
+                    reason: "تقبل بعض كليات الصحة العامة طلاب المساق الهندسية بشرط النجاح في العلوم العامة أو الفيزياء والكيمياء.",
+                    source: "دليل القبول للجامعات السودانية - كليات الصحة والبيئة"
+                },
+                {
+                    majorName: "تكنولوجيا الهندسة الطبية الحيوية (من مساق علمي أحياء)",
+                    originTrackName: "علمي أحياء",
+                    degree: "bach",
+                    minReq: 70.0,
+                    desc: "صيانة وتصميم الأجهزة الطبية والمعدات التشخيصية باللمس الهندسي.",
+                    reason: "تخصص مشترك يستوفي شروط طلاب الهندسية لتوفر الفيزياء والرياضيات بشكل أساسي.",
+                    source: "شروط استيفاء القبول العام - الهندسة الطبية"
+                }
+            ],
+            bio: [
+                {
+                    majorName: "تقنية المعلومات والأنظمة الرقمية (من مساق علمي حاسوب)",
+                    originTrackName: "علمي حاسوب",
+                    degree: "bach",
+                    minReq: 65.0,
+                    desc: "إدارة الشبكات، قواعد البيانات، والدعم الفني للمؤسسات الصحية والخدمية.",
+                    reason: "يستوفي طالب الأحياء شروط التقديم لبعض كليات التقنية لتوفر الرياضيات والفيزياء الأساسية.",
+                    source: "ضوابط القبول العام - الإدارة العامة للقبول"
+                },
+                {
+                    majorName: "هندسة المعدات والأجهزة الطبية (من مساق علمي هندسية)",
+                    originTrackName: "علمي هندسية",
+                    degree: "bach",
+                    minReq: 75.0,
+                    desc: "الربط بين التقنية الهندسية والأجهزة الطبية التشخيصية.",
+                    reason: "تسمح اللوائح لطلاب مساق أحياء المؤهلين بالتقديم لهندسة المعدات الطبية بتوفر الكيمياء والفيزياء.",
+                    source: "دليل القبول للجامعات السودانية"
+                },
+                {
+                    majorName: "هندسة البيئة والموارد الطبيعية (من مساق علمي هندسية)",
+                    originTrackName: "علمي هندسية",
+                    degree: "bach",
+                    minReq: 68.0,
+                    desc: "إدارة الموارد، استزراع البيئة، والتصميم البيئي المباشر.",
+                    reason: "تعتمد كليات البيئة والموارد على مادة الأحياء والفيزياء مما يمنح الطالب أسبقية استيفاء.",
+                    source: "ضوابط القبول العام السوداني"
+                }
+            ],
+            cs: [
+                {
+                    majorName: "الهندسة المدنية والإنشاءات (من مساق علمي هندسية)",
+                    originTrackName: "علمي هندسية",
+                    degree: "bach",
+                    minReq: 74.0,
+                    desc: "تصميم وتنفيذ المباني الخرسانية، الطرق، والبنية التحتية.",
+                    reason: "تستوفي دراسة الرياضيات المتقدمة والفيزياء في مساق الحاسوب شروط المنافسة في الهندسية.",
+                    source: "ضوابط القبول العام - القطاع الهندسي"
+                },
+                {
+                    majorName: "الهندسة الكهربائية والإلكترونيات (من مساق علمي هندسية)",
+                    originTrackName: "علمي هندسية",
+                    degree: "bach",
+                    minReq: 75.0,
+                    desc: "الدوائر الإلكترونية، الطاقة، والتحكم الآلي.",
+                    reason: "شروط المواد الأساسية متوفرة بالكامل لطلاب علمي حاسوب.",
+                    source: "دليل القبول العام للجامعات السودانية"
+                },
+                {
+                    majorName: "إدارة المستشفيات والمعلوماتية الصحية (من مساق علمي أحياء)",
+                    originTrackName: "علمي أحياء",
+                    degree: "bach",
+                    minReq: 62.0,
+                    desc: "إدارة الملفات الطبية الرقمية والأنظمة الصحية بالحلول الحاسوبية.",
+                    reason: "يستوفي طلاب الحاسوب التقديم للتقانات الصحية والمعلوماتية الطبية.",
+                    source: "شروط الاستيفاء بوزارة التعليم العالي"
+                }
+            ],
+            lit: [
+                {
+                    majorName: "التصميم الجرافيكي والتصميم الرقمي (من مساق أدبي فنون)",
+                    originTrackName: "أدبي فنون",
+                    degree: "bach",
+                    minReq: 60.0,
+                    desc: "تصميم الهويات الرقمية والإعلانية واستخدام البرامج التفاعلية.",
+                    reason: "يسمح القبول العام لطلاب الأدبي دراسات بالتقديم لكليات الفنون والتصميم بشرط اجتياز القدرات أو استيفاء المواد المكملة.",
+                    source: "ضوابط قبول كليات الفنون - وزارة التعليم العالي"
+                }
+            ],
+            arts: [
+                {
+                    majorName: "الإعلام والاتصال الجماهيري (من مساق أدبي دراسات)",
+                    originTrackName: "أدبي دراسات",
+                    degree: "bach",
+                    minReq: 65.0,
+                    desc: "الصحافة الرقمية، العلاقات العامة، والإنتاج الإذاعي والتلفزيوني.",
+                    reason: "يستوفي طالب الفنون والتصميم المواد الإنسانية الأساسية للقبول بكليات الإعلام لتعزيز الجانب البصري والإعلامي.",
+                    source: "دليل القبول العام - قطاع العلوم الإنسانية والإعلام"
+                }
+            ]
+        };
+
+        let activeQualifiedMajors = [];
+        let searchedMatchedMajor = null;
+
+        function renderCrossTrackSuggestions() {
+            const feature = document.getElementById('crossTrackFeature');
+            const panel = document.getElementById('crossTrackPanel');
+            if (!feature || !panel) return;
+
+            const userTrack = localStorage.getItem('userTrack');
+            const userPercentage = parseFloat(localStorage.getItem('userPercentage'));
+
+            if (!userTrack || isNaN(userPercentage)) {
+                feature.style.display = 'none';
+                return;
+            }
+
+            const rules = crossTrackRules[userTrack] || [];
+            const qualifiedCrossMajors = rules.filter(r => userPercentage >= r.minReq);
+
+            if (qualifiedCrossMajors.length === 0) {
+                feature.style.display = 'none';
+                return;
+            }
+
+            feature.style.display = 'block';
+
+            let html = `
+                <div class="quiz-note" style="margin-bottom:12px; background:#FFFBEB; color:#92400E; border:1px solid #FDE68A;">
+                    <strong>📌 تنبيه الاستيفاء الرسمي:</strong> التخصصات التالية مرتبطة بمساقات أخرى. لا تعتبر المنصة الأهلية نهائية إلا بعد مطابقة المواد المؤهلة والشروط الخاصة في الدليل الرسمي.
+                </div>
+            `;
+
+            qualifiedCrossMajors.forEach(item => {
+                const degreeLabel = item.degree === 'bach' ? '🎓 بكالوريوس' : '📜 دبلوم';
+                html += `
+                    <div class="cross-item">
+                        <h4>${item.majorName}</h4>
+                        <div class="cross-meta">
+                            <span class="tag tag-degree-bach">${degreeLabel}</span>
+                            <span class="tag" style="background:#EFF6FF; color:#1D4ED8;">المساق الأصلي: ${item.originTrackName}</span>
+                            <span class="tag tag-type-gov">الحد الأدنى: ${item.minReq}%</span>
+                        </div>
+                        <p style="font-size:0.92rem; color:#334155; margin-top:6px;"><strong>نبذة:</strong> ${item.desc}</p>
+                        <div class="cross-note">
+                            <strong>سبب أهلية قبولك فيه:</strong> ${item.reason}
+                        </div>
+                        <span class="cross-source">📜 المصدر: ${item.source}</span>
+                    </div>
+                `;
+            });
+
+            panel.innerHTML = html;
+        }
+
+        function switchView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+            const targetView = document.getElementById('view-' + viewId);
+            const targetNav = document.getElementById('nav-' + viewId);
+
+            if (targetView) targetView.classList.add('active');
+            if (targetNav) targetNav.classList.add('active');
+
+            if (viewId === 'results') {
+                renderResultsView();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const calcForm = document.getElementById('calcForm');
+        if (calcForm) {
+            calcForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const track = document.getElementById('track').value;
+                const percentage = parseFloat(document.getElementById('percentage').value);
+
+                if (track && !isNaN(percentage)) {
+                    localStorage.setItem('userTrack', track);
+                    localStorage.setItem('userPercentage', percentage);
+
+                    switchView('results');
+                }
+            });
+        }
+
+        function renderResultsView() {
+            const userTrack = localStorage.getItem('userTrack');
+            const userPercentage = parseFloat(localStorage.getItem('userPercentage'));
+
+            const resultsInfo = document.getElementById('resultsInfo');
+            const majorsContainer = document.getElementById('majorsContainer');
+            const quizAction = document.getElementById('quizAction');
+            const quizSection = document.getElementById('quizSection');
+            const quizResult = document.getElementById('quizResult');
+
+            quizSection.style.display = 'none';
+            quizResult.style.display = 'none';
+            resetSearchBox();
+
+            if (!userTrack || isNaN(userPercentage)) {
+                resultsInfo.innerHTML = `
+                    <div style="background: #FEF2F2; color: #991B1B; padding: 1.2rem; border-radius: 12px; border: 1px solid #FECACA; text-align: center;">
+                        <span style="font-weight: 700;">لم يتم إدخال البيانات الأكاديمية بعد. يرجى إدخال النسبتان ومساقك أولاً في شاشة الإدخال.</span>
+                    </div>
+                    <button class="btn" style="margin-top: 1rem;" onclick="switchView('percentage')">إدخال البيانات الأكاديمية 📊</button>
+                `;
+                majorsContainer.innerHTML = "";
+                quizAction.style.display = "none";
+                document.querySelector('.search-box-card').style.display = "none";
+                document.getElementById('crossTrackFeature').style.display = "none";
+                return;
+            }
+
+            document.querySelector('.search-box-card').style.display = "block";
+            const trackData = database[userTrack];
+            
+            activeQualifiedMajors = [];
+
+            trackData.majors.forEach(major => {
+                const hasCompetitionData = Array.isArray(major.unis) && major.unis.length > 0;
+                const matchedUnis = hasCompetitionData ? major.unis.filter(u => userPercentage >= Number(u.min)) : [];
+                const lowestMin = hasCompetitionData ? Math.min(...major.unis.map(u => Number(u.min))) : null;
+                if (hasCompetitionData && matchedUnis.length > 0) {
+                    activeQualifiedMajors.push({
+                        ...major,
+                        eligibleUnis: matchedUnis,
+                        lowestMin: lowestMin,
+                        margin: +(userPercentage - lowestMin).toFixed(1)
+                    });
+                }
+            });
+
+            activeQualifiedMajors.sort((a,b) => (a.degree === 'bach' ? 0 : 1) - (b.degree === 'bach' ? 0 : 1) || b.margin - a.margin);
+
+            resultsInfo.innerHTML = `
+                <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 12px; padding: 1rem; display: flex; justify-content: space-between; align-items: center; color: #1E3A8A; font-weight: 700;">
+                    <span>المساق: <strong>${trackData.name}</strong></span>
+                    <span>النسبة: <strong style="color: #2563EB; font-size: 1.1rem;">${userPercentage}%</strong></span>
+                </div>
+            `;
+
+            const summary = document.getElementById('resultsSummary');
+            const totalMajors = trackData.majors.length;
+            const qualifiedCount = activeQualifiedMajors.length;
+            const uniCount = new Set(activeQualifiedMajors.flatMap(m => m.eligibleUnis.map(u => u.name))).size;
+            
+            summary.innerHTML = `
+                <div class="summary-card">
+                    <div style="font-weight:800;font-size:1.05rem;">🎯 ملخص الفرص في مساقك الأساسي</div>
+                    <div style="font-size:.86rem;opacity:.9;margin-top:2px;">التخصصات مرتبة حسب درجة الدراسة وهامش النسبة عن أدنى حد منافسة مدخل في قاعدة المنصة.</div>
+                    <div class="summary-grid">
+                        <div class="summary-stat"><strong>${qualifiedCount}</strong><span>تخصص مؤهل</span></div>
+                        <div class="summary-stat"><strong>${uniCount}</strong><span>جامعة مؤهلة</span></div>
+                        <div class="summary-stat"><strong>${totalMajors}</strong><span>تخصص بالمساق</span></div>
+                    </div>
+                </div>`;
+
+            renderMajorsList(activeQualifiedMajors);
+            renderSupplementalCatalog(trackData.majors.filter(m => m.dataStatus === 'catalog'));
+            renderCrossTrackSuggestions();
+        }
+
+
+        function renderSupplementalCatalog(catalogMajors) {
+            let host = document.getElementById('supplementalCatalog');
+            if (!host) {
+                host = document.createElement('section');
+                host.id = 'supplementalCatalog';
+                host.className = 'card';
+                host.style.marginTop = '1.5rem';
+                document.getElementById('majorsContainer').insertAdjacentElement('afterend', host);
+            }
+
+            if (!catalogMajors || catalogMajors.length === 0) {
+                host.style.display = 'none';
+                host.innerHTML = '';
+                return;
+            }
+
+            host.style.display = 'block';
+            const items = catalogMajors.map(m => `
+                <div class="cross-item" style="border-right-color:#64748B;">
+                    <h4>${m.name}</h4>
+                    <div class="cross-meta">
+                        <span class="tag ${m.degree === 'bach' ? 'tag-degree-bach' : 'tag-degree-dip'}">${m.degree === 'bach' ? '🎓 بكالوريوس' : '📜 دبلوم'}</span>
+                        <span class="tag tag-duration">⏱️ ${m.duration}</span>
+                        <span class="tag" style="background:#F1F5F9;color:#475569;">فهرس موسّع</span>
+                    </div>
+                    <p style="font-size:.9rem;color:#334155;margin-top:6px;"><strong>نبذة:</strong> ${m.desc}</p>
+                    <div class="quiz-note" style="margin-top:8px;">
+                        <strong>⚠️ حالة البيانات:</strong> لم يُسجّل لهذا التخصص حد منافسة مؤسسي داخل قاعدة المنصة الحالية، لذلك لا نعتبره مؤهلاً بمجرد النسبة. راجع المواد المؤهلة ودليل المنافسة الرسمي قبل التقديم.
+                    </div>
+                </div>
+            `).join('');
+
+            host.innerHTML = `
+                <div class="card-header"><h2>📚 تخصصات إضافية في فهرس المنصة</h2></div>
+                <p style="color:#64748B;font-size:.9rem;line-height:1.7;margin-bottom:1rem;">تمت إضافة هذه التخصصات حتى لا تكون قاعدة البحث ناقصة. عدم وجود حد منافسة مدخل هنا لا يعني عدم وجود التخصص أو عدم أهليتك له.</p>
+                ${items}
+            `;
+        }
+
+        function renderMajorsList(majorsList) {
+            const majorsContainer = document.getElementById('majorsContainer');
+            const quizAction = document.getElementById('quizAction');
+            const startQuizBtn = document.getElementById('startQuizBtn');
+            const userPercentage = parseFloat(localStorage.getItem('userPercentage'));
+
+            if (majorsList.length === 0) {
+                majorsContainer.innerHTML = `
+                    <div style="text-align: center; padding: 2.5rem 1rem; color: #64748B; background: #fff; border-radius: 16px; border: 1px solid #E2E8F0;">
+                        <p style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; color: #0F172A;">عذراً 😔</p>
+                        <p>النسبة المدخلة (${userPercentage}%) أقل من الحدود الأدنى للقبول في التخصصات الأساسية لمساقك. تحقق من قسم التخصصات في المساقات الأخرى بالأعلى أو ابحث يدويًا.</p>
+                    </div>
+                `;
+                quizAction.style.display = "none";
+            } else {
+                majorsContainer.innerHTML = "";
+                
+                majorsList.forEach(major => {
+                    const card = document.createElement('div');
+                    const isDiploma = major.degree === 'dip';
+                    card.className = `major-card ${isDiploma ? 'diploma-card' : ''}`;
+
+                    const degreeTag = isDiploma ? 
+                        '<span class="tag tag-degree-dip">📜 دبلوم تقني/وسيط</span>' : 
+                        '<span class="tag tag-degree-bach">🎓 بكالوريوس شرف</span>';
+
+                    let unisHtml = '<div class="uni-badge-list"><h4>الجامعات التي تحقق فيها النسبة الحد الأدنى المدخل في قاعدة المنصة:</h4>';
+                    major.eligibleUnis.forEach(u => {
+                        const typeLabel = u.type === 'gov' ? 'حكومية' : 'خاصة';
+                        const typeClass = u.type === 'gov' ? 'tag-type-gov' : 'tag-type-priv';
+                        unisHtml += `
+                            <div class="uni-item">
+                                <div>
+                                    <span class="uni-name">${u.name}</span>
+                                    <span class="tag ${typeClass}" style="margin-right: 6px;">${typeLabel}</span>
+                                </div>
+                                <span class="uni-min">الحد الأدنى المدخل: ${u.min}%</span>
+                            </div>
+                        `;
+                    });
+                    unisHtml += '</div>';
+
+                    const fitText = major.margin >= 10 ? 'هامش واسع' : (major.margin >= 3 ? 'هامش جيد' : 'قريب من الحد');
+                    const fitClass = major.margin >= 3 ? 'gap-good' : 'gap-close';
+                    card.innerHTML = `
+                        <span class="fit-badge">${fitText}</span>
+                        <h3>${major.name}</h3>
+                        <div class="meta-tags">
+                            ${degreeTag}
+                            <span class="tag tag-duration">⏱️ مدة الدراسة: ${major.duration}</span>
+                        </div>
+                        <div class="gap-line ${fitClass}">📈 الهامش عن أدنى حد منافسة مدخل: +${major.margin}%</div>
+                        <p style="color: #475569; font-size: 0.92rem; margin-bottom: 0.8rem;"><strong>📌 نبذة عن التخصص:</strong> ${major.desc}</p>
+                        ${unisHtml}
+                        <div class="market-info">
+                            <strong>💼 سوق العمل والفرص المتاحة:</strong>
+                            ${major.market}
+                        </div>
+                    `;
+                    majorsContainer.appendChild(card);
+                });
+
+                quizAction.style.display = "block";
+
+                startQuizBtn.onclick = function() {
+                    const quizSection = document.getElementById('quizSection');
+                    quizSection.style.display = "block";
+                    quizAction.style.display = "none";
+                    generateQuiz(activeQualifiedMajors);
+                    quizSection.scrollIntoView({ behavior: 'smooth' });
+                };
+            }
+        }
+
+        (function restoreStudentInputs(){
+            const savedTrack = localStorage.getItem('userTrack');
+            const savedPercentage = localStorage.getItem('userPercentage');
+            const trackEl = document.getElementById('track');
+            const percentageEl = document.getElementById('percentage');
+            if (trackEl && savedTrack) trackEl.value = savedTrack;
+            if (percentageEl && savedPercentage) percentageEl.value = savedPercentage;
+        })();
+
+        function clearStudentData() {
+            if (confirm('هل تريد مسح النسبة والمساق والبدء من جديد؟')) {
+                localStorage.removeItem('userTrack');
+                localStorage.removeItem('userPercentage');
+                const cat = document.getElementById('supplementalCatalog');
+                if (cat) { cat.style.display = 'none'; cat.innerHTML = ''; }
+                switchView('percentage');
+            }
+        }
+
+        function resetSearchBox() {
+            document.getElementById('customSearchInput').value = "";
+            const btn = document.getElementById('searchLightBtn');
+            const btnText = document.getElementById('searchBtnText');
+            const feedback = document.getElementById('searchFeedback');
+            const suggestionsList = document.getElementById('suggestionsList');
+
+            btn.className = "search-btn-indicator";
+            btnText.innerText = "ابحث";
+            feedback.style.display = "none";
+            suggestionsList.style.display = "none";
+            searchedMatchedMajor = null;
+        }
+
+        function handleSearchTyping(query) {
+            const userPercentage = parseFloat(localStorage.getItem('userPercentage'));
+            const btn = document.getElementById('searchLightBtn');
+            const btnText = document.getElementById('searchBtnText');
+            const feedback = document.getElementById('searchFeedback');
+            const suggestionsList = document.getElementById('suggestionsList');
+
+            feedback.style.display = "none";
+            btn.className = "search-btn-indicator";
+            btnText.innerText = "ابحث";
+            searchedMatchedMajor = null;
+
+            const cleanQuery = query.trim().toLowerCase();
+
+            if (cleanQuery === "" || isNaN(userPercentage)) {
+                suggestionsList.style.display = "none";
+                return;
+            }
+
+            let matches = [];
+            Object.keys(database).forEach(trackKey => {
+                database[trackKey].majors.forEach(m => {
+                    if (m.name.toLowerCase().includes(cleanQuery)) {
+                        matches.push(m);
+                    }
+                });
+            });
+
+            if (matches.length > 0) {
+                suggestionsList.innerHTML = "";
+                matches.sort((a, b) => (a.degree === 'bach' ? 0 : 1) - (b.degree === 'bach' ? 0 : 1) || a.name.localeCompare(b.name, 'ar'));
+                matches.forEach(m => {
+                    const item = document.createElement('div');
+                    item.className = 'suggestion-item';
+                    const degreeLabel = m.degree === 'dip' ? 'دبلوم' : 'بكالوريوس';
+                    item.innerHTML = `
+                        <span>${m.name}</span>
+                        <span class="suggestion-degree">${degreeLabel}</span>
+                    `;
+                    item.onclick = function() {
+                        selectSuggestedMajor(m);
+                    };
+                    suggestionsList.appendChild(item);
+                });
+                suggestionsList.style.display = "block";
+            } else {
+                suggestionsList.style.display = "none";
+            }
+        }
+
+        function selectSuggestedMajor(majorObj) {
+            const userPercentage = parseFloat(localStorage.getItem('userPercentage'));
+            const input = document.getElementById('customSearchInput');
+            const btn = document.getElementById('searchLightBtn');
+            const btnText = document.getElementById('searchBtnText');
+            const suggestionsList = document.getElementById('suggestionsList');
+
+            input.value = majorObj.name;
+            suggestionsList.style.display = "none";
+
+            const hasCompetitionData = Array.isArray(majorObj.unis) && majorObj.unis.length > 0;
+            const minReqPercentage = hasCompetitionData ? Math.min(...majorObj.unis.map(u => Number(u.min))) : null;
+            const eligibleUnis = hasCompetitionData ? majorObj.unis.filter(u => userPercentage >= Number(u.min)) : [];
+
+            searchedMatchedMajor = {
+                ...majorObj,
+                minReqPercentage: minReqPercentage,
+                eligibleUnis: eligibleUnis,
+                hasCompetitionData: hasCompetitionData,
+                isQualified: hasCompetitionData && eligibleUnis.length > 0
+            };
+
+            if (!hasCompetitionData) {
+                btn.className = "search-btn-indicator";
+                btnText.innerText = "بيانات غير مكتملة ℹ️";
+            } else if (searchedMatchedMajor.isQualified) {
+                btn.className = "search-btn-indicator light-green";
+                btnText.innerText = "يحقق الحد الأدنى 👍 (اضغط للإضافة)";
+            } else {
+                btn.className = "search-btn-indicator light-red";
+                btnText.innerText = "لا يحقق الحد الأدنى 👎";
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            const suggestionsList = document.getElementById('suggestionsList');
+            const input = document.getElementById('customSearchInput');
+            if (e.target !== input && e.target !== suggestionsList) {
+                if (suggestionsList) suggestionsList.style.display = "none";
+            }
+        });
+
+        function executeSearchAction() {
+            const query = document.getElementById('customSearchInput').value.trim();
+            const feedback = document.getElementById('searchFeedback');
+            const userPercentage = parseFloat(localStorage.getItem('userPercentage'));
+
+            if (query === "") {
+                feedback.className = "search-feedback error";
+                feedback.innerText = "يرجى كتابة واختيار اسم التخصص أولاً من القائمة المنبثقة.";
+                feedback.style.display = "block";
+                return;
+            }
+
+            if (!searchedMatchedMajor) {
+                feedback.className = "search-feedback error";
+                feedback.innerText = `يرجى اختيار التخصص المطلوب مباشرة من القائمة المنبثقة للتنبؤ للتحقق من نسبتك المئوية.`;
+                feedback.style.display = "block";
+                return;
+            }
+
+            if (!searchedMatchedMajor.hasCompetitionData) {
+                feedback.className = "search-feedback success";
+                feedback.style.display = "block";
+                feedback.innerHTML = `📚 <strong>${searchedMatchedMajor.name}</strong> موجود في الفهرس الموسّع، لكن لا توجد له حالياً بيانات منافسة مؤسسية مدخلة داخل قاعدة المنصة. راجع <a href="${admissionDataMeta.sourceUrl}" target="_blank" rel="noopener">دليل القبول الرسمي</a> والمواد المؤهلة قبل التقديم.`;
+                return;
+            }
+
+            if (searchedMatchedMajor.isQualified) {
+                const alreadyExists = activeQualifiedMajors.some(m => m.id === searchedMatchedMajor.id);
+                
+                if (!alreadyExists) {
+                    activeQualifiedMajors.unshift(searchedMatchedMajor);
+                }
+
+                feedback.className = "search-feedback success";
+                feedback.innerText = `🎉 رائع! نسبتك تحقق الحد الأدنى المدخل لتخصص (${searchedMatchedMajor.name}). تم إضافة التخصص بنجاح إلى قائمة التخصصات المقترحة لك أدناه!`;
+                feedback.style.display = "block";
+
+                renderMajorsList(activeQualifiedMajors);
+
+                setTimeout(() => {
+                    document.getElementById('majorsContainer').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+
+            } else {
+                feedback.className = "search-feedback error";
+                feedback.innerHTML = `
+                    🚫 <strong>عذراً، نسبتك لا تحقق الحد الأدنى المدخل لهذا الاختيار.</strong><br>
+                    <strong>السبب:</strong> أدنى نسبة للقبول في تخصص (${searchedMatchedMajor.name}) هي <strong>${searchedMatchedMajor.minReqPercentage}%</strong>، ونسبتك المحفوظة حالياً هي (<strong>${userPercentage}%</strong>) وهو أقل من الحد الأدنى للقبول.
+                `;
+                feedback.style.display = "block";
+            }
+        }
+
+        const majorPersonalityProfiles = {
+            cs_sci: {label:'تحليل وبرمجة', traits:{analytical:5, technical:5, research:4, creative:3, detail:4}},
+            swe: {label:'هندسة البرمجيات وإدارة الأنظمة', traits:{analytical:5, technical:5, leadership:4, detail:5, creative:3}},
+            it: {label:'تقنية المعلومات والشبكات', traits:{technical:5, practical:5, analytical:4, detail:4, leadership:3}},
+            dip_cs: {label:'التطبيق التقني للحاسوب', traits:{technical:5, practical:5, analytical:3, detail:3}},
+            dip_net: {label:'الشبكات والاتصالات', traits:{technical:5, practical:5, field:4, analytical:4, detail:4}},
+            med: {label:'الرعاية والتشخيص الطبي', traits:{healthcare:5, research:5, detail:5, communication:4, endurance:5}},
+            dent: {label:'الدقة والرعاية السريرية', traits:{healthcare:5, detail:5, practical:4, creative:3, endurance:4}},
+            pharm: {label:'الأدوية والعلوم الكيميائية', traits:{healthcare:4, research:5, detail:5, analytical:4}},
+            labs: {label:'التحليل المخبري والبحث', traits:{research:5, detail:5, analytical:5, healthcare:4, technical:3}},
+            nursing: {label:'الرعاية والتواصل الإنساني', traits:{healthcare:5, communication:5, endurance:5, practical:4, empathy:5}},
+            dip_pharm: {label:'التطبيق الصيدلاني', traits:{healthcare:4, practical:4, detail:5, communication:3}},
+            dip_labs: {label:'العمل المخبري التطبيقي', traits:{research:4, detail:5, technical:4, practical:4}},
+            dip_nurs: {label:'الرعاية الصحية التطبيقية', traits:{healthcare:5, communication:5, practical:5, endurance:4, empathy:5}},
+            elec_comm: {label:'الهندسة والاتصالات', traits:{technical:5, analytical:5, practical:5, field:4, detail:4}},
+            petroleum: {label:'العمل الهندسي الميداني', traits:{analytical:5, practical:5, field:5, technical:4, endurance:4}},
+            civil: {label:'التشييد والهندسة الميدانية', traits:{analytical:5, practical:5, field:5, detail:4, leadership:3}},
+            mech: {label:'الآلات والتطبيق الهندسي', traits:{technical:5, practical:5, analytical:5, detail:4}},
+            architecture: {label:'التصميم الهندسي والإبداع', traits:{creative:5, analytical:4, detail:5, practical:4, visual:5}},
+            dip_civil: {label:'التطبيق الإنشائي', traits:{practical:5, field:5, technical:4, detail:4}},
+            dip_mech: {label:'صيانة وتشغيل الآلات', traits:{technical:5, practical:5, field:4, detail:4}},
+            dip_elec: {label:'التركيبات الكهربائية', traits:{technical:5, practical:5, field:5, detail:4}},
+            law: {label:'الحجة والتحليل القانوني', traits:{communication:5, analytical:5, leadership:4, detail:4, reading:5}},
+            econ: {label:'الأعمال والمال والإدارة', traits:{business:5, analytical:5, leadership:5, communication:4, detail:4}},
+            media: {label:'الإعلام وصناعة المحتوى', traits:{communication:5, creative:5, visual:4, leadership:3, business:3}},
+            dip_admin: {label:'الإدارة والمبيعات', traits:{business:5, communication:5, practical:4, leadership:4}},
+            dip_bank: {label:'العمليات المصرفية والمالية', traits:{business:5, analytical:4, detail:5, communication:4}},
+            design: {label:'التصميم والإبداع البصري', traits:{creative:5, visual:5, detail:5, technical:3, business:3}},
+            fine_art: {label:'الفنون والتعبير البصري', traits:{creative:5, visual:5, communication:3, detail:4}},
+            dip_design: {label:'التصميم الجرافيكي والإعلان', traits:{creative:5, visual:5, detail:5, technical:3, business:3}},
+            cs_engineering:{label:'هندسة الحاسوب',traits:{technical:5,analytical:5,practical:5,detail:4}},
+            info_systems:{label:'نظم المعلومات',traits:{technical:4,analytical:5,practical:4,business:4,detail:4}},
+            ai:{label:'الذكاء الاصطناعي',traits:{analytical:5,technical:5,research:5,detail:4,creative:3}},
+            cyber:{label:'الأمن السيبراني',traits:{technical:5,analytical:5,research:5,detail:5}},
+            data_science:{label:'علم البيانات',traits:{analytical:5,research:5,technical:4,detail:5}},
+            computer_info_security:{label:'أمن المعلومات',traits:{technical:5,detail:5,analytical:5,research:4}},
+            multimedia_cs:{label:'الوسائط المتعددة التقنية',traits:{creative:5,technical:4,visual:5,practical:4}},
+            dip_info_sys:{label:'نظم المعلومات التطبيقية',traits:{technical:4,practical:5,detail:4}},
+            dip_cyber:{label:'أمن المعلومات والشبكات',traits:{technical:5,practical:5,detail:5}},
+            vet:{label:'الرعاية البيطرية',traits:{healthcare:5,research:4,practical:5,detail:5,endurance:4}},
+            dental_tech:{label:'التقانة السنية',traits:{technical:5,detail:5,practical:5,creative:3}},
+            public_health:{label:'الصحة العامة',traits:{healthcare:5,research:5,communication:4,practical:4}},
+            physiotherapy:{label:'العلاج الطبيعي',traits:{healthcare:5,practical:5,communication:4,endurance:5}},
+            radiology:{label:'التصوير الطبي',traits:{technical:5,detail:5,healthcare:4,practical:4}},
+            anesthesia:{label:'التخدير والعناية الحرجة',traits:{healthcare:5,detail:5,endurance:5,technical:4,practical:4}},
+            clinical_nutrition:{label:'التغذية العلاجية',traits:{healthcare:5,research:4,communication:4,detail:5}},
+            midwifery:{label:'رعاية الأمومة والقبالة',traits:{healthcare:5,communication:5,empathy:5,endurance:5}},
+            optometry:{label:'البصريات',traits:{technical:4,detail:5,healthcare:4,practical:4}},
+            occupational_therapy:{label:'العلاج الوظيفي',traits:{healthcare:5,empathy:5,practical:5,communication:4,creative:3}},
+            food_science:{label:'علوم الأغذية',traits:{research:5,detail:5,technical:4,practical:4}},
+            agriculture:{label:'الإنتاج النباتي',traits:{practical:5,field:5,research:4,detail:4}},
+            animal_production:{label:'الإنتاج الحيواني',traits:{practical:5,field:5,research:4,detail:4}},
+            forestry:{label:'الغابات والموارد الطبيعية',traits:{field:5,research:4,practical:5,detail:3}},
+            dip_dental_tech:{label:'تقانة الأسنان التطبيقية',traits:{technical:5,practical:5,detail:5}},
+            dip_radiology:{label:'الأشعة التطبيقية',traits:{technical:5,practical:5,detail:5}},
+            dip_physio:{label:'العلاج الطبيعي التطبيقي',traits:{healthcare:5,practical:5,communication:4}},
+            electrical_engineering:{label:'الهندسة الكهربائية',traits:{technical:5,analytical:5,practical:5,detail:4}},
+            electronics_engineering:{label:'الهندسة الإلكترونية',traits:{technical:5,analytical:5,practical:5,detail:5}},
+            computer_engineering:{label:'هندسة الحاسوب',traits:{technical:5,analytical:5,practical:5,detail:4}},
+            chemical_engineering:{label:'الهندسة الكيميائية',traits:{analytical:5,technical:4,research:5,practical:4}},
+            industrial_engineering:{label:'الهندسة الصناعية',traits:{analytical:5,practical:5,detail:4,leadership:4}},
+            environmental_engineering:{label:'الهندسة البيئية',traits:{analytical:5,research:4,practical:5,field:4}},
+            biomedical_engineering:{label:'الهندسة الطبية الحيوية',traits:{technical:5,analytical:5,healthcare:4,practical:5}},
+            surveying_engineering:{label:'هندسة المساحة',traits:{technical:5,detail:5,field:5,practical:5}},
+            water_resources:{label:'هندسة المياه',traits:{analytical:5,practical:5,field:4,detail:4}},
+            agricultural_engineering:{label:'الهندسة الزراعية',traits:{technical:5,practical:5,field:5,analytical:4}},
+            materials_engineering:{label:'هندسة المواد',traits:{technical:5,research:5,analytical:5,detail:5}},
+            dip_surveying:{label:'المساحة التطبيقية',traits:{field:5,practical:5,detail:5,technical:4}},
+            dip_electronics:{label:'الإلكترونيات التطبيقية',traits:{technical:5,practical:5,detail:5}},
+            dip_telecom:{label:'الاتصالات التطبيقية',traits:{technical:5,practical:5,field:4,analytical:4}},
+            dip_hvac:{label:'التكييف والتبريد',traits:{technical:5,practical:5,field:5,detail:4}},
+            accounting:{label:'المحاسبة',traits:{business:5,analytical:5,detail:5,communication:3}},
+            business_admin:{label:'إدارة الأعمال',traits:{business:5,leadership:5,communication:4,analytical:4}},
+            banking_finance:{label:'التمويل والمصارف',traits:{business:5,analytical:5,detail:5,communication:4}},
+            marketing:{label:'التسويق',traits:{business:5,communication:5,creative:4,leadership:4}},
+            hr:{label:'الموارد البشرية',traits:{communication:5,empathy:5,leadership:4,business:4}},
+            mis:{label:'نظم المعلومات الإدارية',traits:{business:5,technical:4,analytical:5,communication:4}},
+            arabic:{label:'اللغة العربية',traits:{reading:5,communication:5,detail:5,creative:3}},
+            english:{label:'اللغة الإنجليزية',traits:{reading:5,communication:5,detail:4,research:4}},
+            french:{label:'اللغة الفرنسية',traits:{reading:5,communication:5,detail:4}},
+            psychology:{label:'علم النفس',traits:{research:5,communication:5,empathy:5,analytical:4}},
+            sociology:{label:'علم الاجتماع',traits:{research:5,communication:5,analytical:4,reading:4}},
+            geography:{label:'الجغرافيا والبيئة',traits:{visual:4,field:5,research:4,detail:4}},
+            history:{label:'التاريخ والآثار',traits:{reading:5,research:5,detail:4,communication:4}},
+            library_info:{label:'المكتبات والمعلومات',traits:{detail:5,research:5,reading:5,technical:3}},
+            tourism_hospitality:{label:'السياحة والضيافة',traits:{communication:5,business:4,practical:5,leadership:3}},
+            education:{label:'التربية والتعليم',traits:{communication:5,empathy:5,leadership:4,endurance:5}},
+            islamic_studies:{label:'الدراسات الإسلامية',traits:{reading:5,research:5,communication:4,detail:4}},
+            translation:{label:'الترجمة',traits:{reading:5,communication:5,detail:5,research:4}},
+            dip_accounting:{label:'المحاسبة التطبيقية',traits:{business:5,analytical:4,detail:5,practical:4}},
+            dip_hr:{label:'الموارد البشرية التطبيقية',traits:{communication:5,business:4,detail:4,practical:4}},
+            dip_library:{label:'المكتبات والمعلومات التطبيقية',traits:{detail:5,research:5,practical:4}},
+            dip_tourism:{label:'السياحة والضيافة التطبيقية',traits:{communication:5,practical:5,business:4}},
+            interior_design:{label:'التصميم الداخلي',traits:{creative:5,visual:5,detail:5,practical:5}},
+            fashion_design:{label:'تصميم الأزياء',traits:{creative:5,visual:5,detail:5,practical:4}},
+            multimedia_art:{label:'الوسائط المتعددة الإبداعية',traits:{creative:5,visual:5,technical:4,communication:4}},
+            photography:{label:'التصوير الفوتوغرافي',traits:{visual:5,creative:5,detail:5,technical:3}},
+            theatre:{label:'المسرح والفنون الأدائية',traits:{creative:5,communication:5,leadership:3,endurance:4}},
+            music:{label:'الموسيقى والفنون الصوتية',traits:{creative:5,communication:4,detail:4,endurance:4}},
+            animation:{label:'الرسوم المتحركة',traits:{creative:5,visual:5,technical:4,detail:5}},
+            industrial_design:{label:'التصميم الصناعي',traits:{creative:5,visual:4,technical:4,detail:5,practical:5}},
+            fine_crafts:{label:'الحرف والفنون التطبيقية',traits:{creative:5,visual:5,detail:5,practical:5}},
+            dip_interior:{label:'التصميم الداخلي التطبيقي',traits:{creative:5,visual:5,detail:5,practical:5}},
+            dip_multimedia:{label:'الوسائط المتعددة التطبيقية',traits:{creative:5,visual:5,technical:4,practical:5}},
+            dip_fashion:{label:'تصميم الأزياء التطبيقي',traits:{creative:5,visual:5,detail:5,practical:5}}
+        };
+
+        const trackQuestionSets = {
+            bio: [
+                {id:'bio_1', trait:'healthcare', text:'لو أتيحت لك فرصة مساعدة مريض والتعامل مع حالته الصحية، هل تشعر أن هذا النوع من العمل يهمك؟'},
+                {id:'bio_2', trait:'research', text:'هل تستمتع بدراسة جسم الإنسان والأحياء والبحث عن أسباب الظواهر والنتائج العلمية؟'},
+                {id:'bio_3', trait:'detail', text:'هل لديك استعداد لحفظ ومراجعة معلومات علمية كثيرة والانتباه للفروق الدقيقة بين الحالات والمعلومات؟'},
+                {id:'bio_4', trait:'empathy', text:'عندما يكون شخص مريضاً أو خائفاً، هل تستطيع الاستماع إليه والتعامل معه بهدوء وتعاطف؟'},
+                {id:'bio_5', trait:'practical', text:'هل تحب التجارب العملية والتعامل مع العينات والأجهزة الطبية بدلاً من الاكتفاء بالقراءة النظرية؟'},
+                {id:'bio_6', trait:'endurance', text:'هل تستطيع الاستمرار في دراسة تخصص صحي يحتاج إلى سنوات من الدراسة والتدريب والمراجعة المستمرة؟'},
+                {id:'bio_7', trait:'analytical', text:'هل تستمتع بتحليل الأعراض أو النتائج المخبرية ومقارنتها للوصول إلى تفسير منطقي؟'},
+                {id:'bio_8', trait:'communication', text:'هل تشعر بالراحة عندما تشرح لشخص معلومات صحية أو إرشادات بطريقة واضحة ومفهومة؟'},
+                {id:'bio_9', trait:'technical', text:'هل يثير اهتمامك استخدام الأجهزة الطبية والتقنيات الحديثة في التشخيص والعلاج؟'},
+                {id:'bio_10', trait:'research', text:'إذا واجهتك معلومة طبية صعبة، هل تميل إلى البحث والتعمق فيها حتى تفهمها بدقة؟'}
+            ],
+            cs: [
+                {id:'cs_1', trait:'analytical', text:'عندما تواجه مشكلة في الكمبيوتر، هل تستمتع بتقسيمها إلى أجزاء وتجربة حلول منطقية حتى تعرف السبب؟'},
+                {id:'cs_2', trait:'technical', text:'هل تستمتع بمعرفة كيف تعمل البرامج والأنظمة والشبكات والأجهزة من الداخل؟'},
+                {id:'cs_3', trait:'practical', text:'هل تستمتع بالتطبيق العملي مثل Packet Tracer أو تركيب شبكة أو تجربة برنامج بنفسك أكثر من الاستماع للشرح فقط؟'},
+                {id:'cs_4', trait:'detail', text:'هل تستطيع التركيز في الأكواد والإعدادات والأرقام واكتشاف خطأ صغير قد يسبب مشكلة كبيرة؟'},
+                {id:'cs_5', trait:'research', text:'عندما لا تعرف طريقة حل مشكلة تقنية، هل تستمتع بالبحث وقراءة التوثيق وتجربة أكثر من حل؟'},
+                {id:'cs_6', trait:'creative', text:'هل تستمتع بابتكار فكرة تطبيق أو نظام جديد أو طريقة مختلفة لحل مشكلة؟'},
+                {id:'cs_7', trait:'field', text:'هل تفضل أحياناً العمل عملياً مع الراوترات والسويتشات والكابلات ومعدات الشبكات بدلاً من العمل البرمجي فقط؟'},
+                {id:'cs_8', trait:'leadership', text:'هل تميل إلى تنظيم فريق تقني وتوزيع مهام مشروع الشبكة أو النظام ومتابعة إنجازه؟'},
+                {id:'cs_9', trait:'endurance', text:'هل تستطيع الجلوس والتركيز فترة طويلة في حل مشكلة برمجية أو تقنية دون أن تمل سريعاً؟'},
+                {id:'cs_10', trait:'communication', text:'هل تستطيع شرح مشكلة تقنية لشخص غير متخصص بطريقة بسيطة وواضحة؟'}
+            ],
+            eng: [
+                {id:'eng_1', trait:'analytical', text:'هل تستمتع بالحسابات والمنطق وتحليل العلاقات بين الأرقام والقوانين للوصول إلى نتيجة؟'},
+                {id:'eng_2', trait:'practical', text:'هل تحب تحويل المعادلات والأفكار النظرية إلى أجهزة أو منشآت أو حلول موجودة على أرض الواقع؟'},
+                {id:'eng_3', trait:'technical', text:'هل تستمتع بفهم الآلات والدوائر والأجهزة والأنظمة الهندسية وكيف تعمل؟'},
+                {id:'eng_4', trait:'field', text:'هل لا تمانع العمل في مواقع المشاريع والمصانع والورش والميدان بدلاً من المكتب دائماً؟'},
+                {id:'eng_5', trait:'detail', text:'هل تهتم بدقة القياسات والمخططات والمواصفات ولا تتجاوز خطأً صغيراً في عمل هندسي؟'},
+                {id:'eng_6', trait:'creative', text:'هل تستمتع بتصميم حل هندسي أو رسم مخطط أو التفكير في طريقة جديدة لتنفيذ مشروع؟'},
+                {id:'eng_7', trait:'endurance', text:'هل لديك استعداد لمواجهة مواد رياضيات وفيزياء وهندسة تحتاج إلى تدريب مستمر حتى تتقنها؟'},
+                {id:'eng_8', trait:'research', text:'هل تستمتع بالبحث عن سبب عطل أو ظاهرة هندسية وتجربة أكثر من احتمال قبل الوصول للحل؟'},
+                {id:'eng_9', trait:'leadership', text:'هل تستطيع تحمل مسؤولية مشروع هندسي وتنظيم فريق والعمل وفق خطة ومواعيد؟'},
+                {id:'eng_10', trait:'communication', text:'هل تستطيع مناقشة فكرة أو مخطط هندسي مع فريق العمل وشرح سبب اختيارك لحل معين؟'}
+            ],
+            lit: [
+                {id:'lit_1', trait:'reading', text:'هل تستمتع بقراءة النصوص الطويلة ومقارنتها وتحليل المعاني والحجج المختلفة؟'},
+                {id:'lit_2', trait:'communication', text:'هل تشعر بالراحة في النقاش والتعبير عن رأيك وشرح فكرتك أمام الآخرين؟'},
+                {id:'lit_3', trait:'leadership', text:'هل تميل إلى قيادة النقاش وتنظيم الآخرين وتحمل مسؤولية القرار؟'},
+                {id:'lit_4', trait:'business', text:'هل يثير اهتمامك البيع والتسويق وإدارة المال والمشاريع وكيف يتحول النشاط التجاري إلى دخل؟'},
+                {id:'lit_5', trait:'creative', text:'هل تستمتع بكتابة فكرة أو قصة أو محتوى جديد بطريقة مختلفة وجذابة؟'},
+                {id:'lit_6', trait:'detail', text:'هل تنتبه إلى الكلمات والأرقام والتفاصيل الصغيرة عند كتابة مستند أو عقد أو تقرير؟'},
+                {id:'lit_7', trait:'analytical', text:'هل تستمتع بمقارنة الأدلة والآراء والوصول إلى نتيجة منطقية قبل الحكم على موضوع؟'},
+                {id:'lit_8', trait:'visual', text:'هل لديك اهتمام بالصور والإخراج والألوان وطريقة تقديم الرسالة بشكل جذاب؟'},
+                {id:'lit_9', trait:'practical', text:'هل تحب الأعمال التطبيقية مثل تنظيم حملة أو إدارة فعالية أو تنفيذ خطة بدلاً من الدراسة النظرية فقط؟'},
+                {id:'lit_10', trait:'endurance', text:'هل تستطيع التركيز في القراءة والكتابة والمراجعة لفترة طويلة لإنجاز عمل متقن؟'}
+            ],
+            arts: [
+                {id:'arts_1', trait:'creative', text:'هل تستمتع بابتكار تصاميم وأفكار بصرية جديدة حتى دون أن يطلب منك أحد ذلك؟'},
+                {id:'arts_2', trait:'visual', text:'هل تلاحظ بسرعة تناسق الألوان والأشكال والخطوط والمساحات في التصميم؟'},
+                {id:'arts_3', trait:'detail', text:'هل تستطيع تعديل تفاصيل صغيرة في تصميمك عدة مرات حتى تصل إلى الشكل الذي تريده؟'},
+                {id:'arts_4', trait:'technical', text:'هل تستمتع بتعلم برامج التصميم والتحرير واستخدام الأدوات الرقمية لإنتاج عمل فني؟'},
+                {id:'arts_5', trait:'communication', text:'هل تستطيع فهم فكرة العميل وتحويلها إلى تصميم يوصل الرسالة للناس بوضوح؟'},
+                {id:'arts_6', trait:'business', text:'هل يهمك أن تحول مهارتك في التصميم أو الفن إلى عمل حر أو مشروع تجاري؟'},
+                {id:'arts_7', trait:'practical', text:'هل تتعلم التصميم والفن بصورة أفضل عندما تطبق بيدك وتنتج أعمالاً فعلية؟'},
+                {id:'arts_8', trait:'research', text:'هل تبحث عن أمثلة واتجاهات جديدة وتتعلم من أعمال المصممين والفنانين لتطوير مستواك؟'},
+                {id:'arts_9', trait:'endurance', text:'هل تستطيع العمل على لوحة أو تصميم لساعات مع المحافظة على تركيزك حتى تكتمل الفكرة؟'},
+                {id:'arts_10', trait:'leadership', text:'هل تميل إلى قيادة فريق إبداعي وتوزيع المهام ومراجعة جودة الأعمال قبل نشرها؟'}
+            ]
+        };
+
+        function getQuizQuestions() {
+            const track = localStorage.getItem('userTrack');
+            return trackQuestionSets[track] || [];
+        }
+
+        function renderPersonalityQuiz(majors) {
+            const quizContainer = document.getElementById('quizContainer');
+            const questions = getQuizQuestions();
+            quizContainer.innerHTML = `
+                <div class="quiz-note" style="margin-bottom:16px;">
+                    <strong>📌 الاختبار مخصص لمساقك: ${database[localStorage.getItem('userTrack')]?.name || ''}</strong><br>
+                    أجب عن <strong>جميع الأسئلة</strong>. اختر خياراً واحداً لكل سؤال. ستظهر <strong>علامة ✓ خضراء</strong> عند الاختيار.
+                </div>`;
+            questions.forEach((q, i) => {
+                const div = document.createElement('div');
+                div.className = 'quiz-question personality-question';
+                div.style.marginBottom = "1.5rem";
+                div.innerHTML = `
+                    <p style="font-weight: 700; color: #0F172A; margin-bottom: 0.6rem;">${i+1}. ${q.text}</p>
+                    <div class="likert-options">
+                        <label><input type="radio" name="${q.id}" value="1"> لا تنطبق أبداً</label>
+                        <label><input type="radio" name="${q.id}" value="2"> لا تنطبق غالباً</label>
+                        <label><input type="radio" name="${q.id}" value="3"> محايد</label>
+                        <label><input type="radio" name="${q.id}" value="4"> تنطبق غالباً</label>
+                        <label><input type="radio" name="${q.id}" value="5"> تنطبق جداً</label>
+                    </div>`;
+                quizContainer.appendChild(div);
+            });
+        }
+
+        function calculatePersonalityTraits() {
+            const questions = getQuizQuestions();
+            const traits = {};
+            const unanswered = [];
+            questions.forEach((q, index) => {
+                const el = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (!el) unanswered.push(index + 1);
+                else traits[q.trait] = (traits[q.trait] || 0) + Number(el.value);
+            });
+            if (unanswered.length) return {error: unanswered};
+            const counts = {};
+            questions.forEach(q => counts[q.trait] = (counts[q.trait] || 0) + 1);
+            Object.keys(traits).forEach(t => traits[t] = +(traits[t] / counts[t]).toFixed(2));
+            return {traits};
+        }
+
+        function calculateMajorFit(major, traits) {
+            const profile = majorPersonalityProfiles[major.id];
+            if (!profile) return 0;
+            const weights = profile.traits || {};
+            let weighted = 0, max = 0;
+            Object.entries(weights).forEach(([trait, weight]) => {
+                weighted += (traits[trait] || 0) * weight;
+                max += 5 * weight;
+            });
+            return max ? +(weighted / max * 100).toFixed(1) : 0;
+        }
+
+        function generateQuiz(majors) {
+            const submitQuizBtn = document.getElementById('submitQuizBtn');
+            const quizResult = document.getElementById('quizResult');
+            renderPersonalityQuiz(majors);
+
+            submitQuizBtn.onclick = function() {
+                const personalityData = calculatePersonalityTraits();
+                if (personalityData.error) {
+                    quizResult.innerHTML = `<div class="quiz-best-box warning-box"><div class="quiz-result-label">⚠️ أكمل الاختبار أولاً</div><p>لم تتم الإجابة على الأسئلة رقم: <strong>${personalityData.error.join('، ')}</strong>.</p><p>الرجاء الإجابة على جميع الأسئلة حتى يكون تحليل الشخصية والتخصص دقيقاً.</p></div>`;
+                    quizResult.style.display = 'block';
+                    quizResult.scrollIntoView({behavior:'smooth'});
+                    return;
+                }
+                const traits = personalityData.traits;
+                const allMajors = database[localStorage.getItem('userTrack')].majors;
+                const userPercentage = parseFloat(localStorage.getItem('userPercentage'));
+
+                const scored = allMajors.map(major => {
+                    const hasCompetitionData = Array.isArray(major.unis) && major.unis.length > 0;
+                    const minReq = hasCompetitionData ? Math.min(...major.unis.map(u => Number(u.min))) : null;
+                    const eligibleUnis = hasCompetitionData ? major.unis.filter(u => userPercentage >= Number(u.min)) : [];
+                    return {
+                        major,
+                        fit: calculateMajorFit(major, traits),
+                        eligible: hasCompetitionData && eligibleUnis.length > 0,
+                        eligibleUnis,
+                        minReq,
+                        margin: minReq === null ? null : +(userPercentage - minReq).toFixed(1)
+                    };
+                }).sort((a,b) => b.fit - a.fit);
+
+                const bestPersonality = scored[0];
+                const eligibleRanked = scored.filter(x => x.eligible);
+                const bestEligible = eligibleRanked[0];
+                const alternatives = eligibleRanked.slice(1,4);
+                const applyUrl = "https://admission.gov.sd/";
+
+                if (!bestPersonality) return;
+                const personalityMessage = bestPersonality.fit >= 80 ? 'توافق شخصي ممتاز' : bestPersonality.fit >= 65 ? 'توافق شخصي جيد' : 'توافق شخصي متوسط';
+                const eligibleBlock = bestEligible ? `
+                    <div class="quiz-best-box">
+                        <div class="quiz-result-label">🎓 أعلى تطابق شخصي ضمن التخصصات التي تحقق شرط النسبة المدخل</div>
+                        <h3>${bestEligible.major.name}</h3>
+                        <div class="quiz-score-row"><span>التوافق الشخصي</span><strong>${bestEligible.fit}%</strong></div>
+                        <div class="quiz-score-row"><span>حالة القبول حسب النسبة</span><strong style="color:#059669">مؤهل</strong></div>
+                        <p style="margin-top:8px; font-size:0.9rem;">لديك أهلية قبول في <strong>${bestEligible.eligibleUnis.length}</strong> جامعة مسجلة لهذا التخصص.</p>
+                    </div>` : `
+                    <div class="quiz-best-box warning-box">
+                        <div class="quiz-result-label">🧭 أقوى تطابق مع شخصيتك</div>
+                        <h3>${bestPersonality.major.name}</h3>
+                        <div class="quiz-score-row"><span>التوافق الشخصي</span><strong>${bestPersonality.fit}%</strong></div>
+                        <p style="margin-top:8px; font-size:0.9rem;">هذا التخصص يظهر كتطابق شخصي مرتفع، لكن نسبتك الحالية لا تحقق الحد الأدنى المدخل له (<strong>${bestPersonality.minReq}%</strong>).</p>
+                    </div>`;
+
+                const personalityTop = scored.slice(0,3).map((x,i) => `<div style="background:#F8FAFC; border:1px solid #E2E8F0; padding:10px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;"><span><b>${i+1}. ${x.major.name}</b></span><span style="background:#EFF6FF; color:#1D4ED8; padding:3px 10px; border-radius:20px; font-size:0.8rem; font-weight:800;">${x.fit}% توافق</span></div>`).join('');
+
+                quizResult.innerHTML = `
+                    <p style="margin-bottom:12px;font-size:1.1rem;font-weight:800;">🧠 <strong>${personalityMessage}</strong></p>
+                    ${eligibleBlock}
+                    <div style="text-align:right;margin-top:1.2rem;"><strong>👤 أعلى التخصصات توافقاً مع إجاباتك:</strong><div style="margin-top:8px;">${personalityTop}</div></div>
+                    <div class="quiz-note">ℹ️ النسبة تحدد <strong>إمكانية التقديم</strong>، بينما اختبار الشخصية يحدد <strong>مدى ملاءمة التخصص لك</strong>.</div>
+                    <div style="margin-top:16px;"><a href="${applyUrl}" target="_blank" rel="noopener" class="btn btn-dark">الانتقال إلى موقع التقديم 🔗</a></div>`;
+                quizResult.style.display = 'block';
+                quizResult.scrollIntoView({ behavior:'smooth' });
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('openCrossTrackBtn');
+            const panel = document.getElementById('crossTrackPanel');
+            if (btn && panel) {
+                btn.addEventListener('click', () => {
+                    panel.classList.toggle('open');
+                    if (panel.classList.contains('open')) {
+                        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
